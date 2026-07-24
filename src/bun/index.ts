@@ -23,16 +23,46 @@ async function getMainViewUrl(): Promise<string> {
 // Create the main application window
 const url = await getMainViewUrl();
 
-const mainWindow = new BrowserWindow({
+const appMainWindow = new BrowserWindow({
 	title: "qCodelicious",
 	url,	
 	frame: {
 		width: 800,
 		height: 600,
-		x: 50,
-		y: 50,
-	},	
+		x: 40,
+		y: 40,		
+	},			
 	transparent: true,
 });
+
+appMainWindow.webview.autoResize = true;
+
+appMainWindow.webview.on("dom-ready", () => {
+	// GAMBIARRA: Força o alinhamento de dimensões do webview no boot inicial
+	const size = appMainWindow.getSize();
+	appMainWindow.setSize(size.width - 0.5, size.height - 0.5);	
+});
+
+appMainWindow.on("resize", (e: any) => {
+	const MIN_WIDTH_SIZE = 380;
+	const MIN_HEIGHT_SIZE = 380;
+	let currentSize = appMainWindow.getSize();
+	let isLimiter = false;	
+	
+	if (e.data.width < MIN_WIDTH_SIZE) {
+		currentSize.width = MIN_WIDTH_SIZE;
+		isLimiter = true;
+	}
+	if (e.data.height < MIN_HEIGHT_SIZE) {
+		currentSize.height = MIN_HEIGHT_SIZE;
+		isLimiter = true;
+	}
+
+	if (isLimiter) {
+		appMainWindow.setSize(currentSize.width,currentSize.height);		
+	}
+	
+});
+
 
 console.log("qCodelicious start");
