@@ -1,13 +1,13 @@
-import { AppMenuBar, Ranger } from './components/index.tsx';
-import AceEditor from "react-ace";
+import { AppMenuBar, MainEditor, Ranger } from './components/index';
+import { EditorProvider } from './contexts/EditorContext';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+
 //import CssBaseline from '@mui/material/CssBaseline';
 
-import "ace-builds/src-min-noconflict/theme-twilight";
-import "ace-builds/src-min-noconflict/ext-language_tools";
+//import "ace-builds/src-min-noconflict/theme-twilight";
+//import "ace-builds/src-min-noconflict/ext-language_tools";
 
-function App() {
-	//const [count, setCount] = useState(0);
+function App() {	
 
 	const darkTheme = createTheme({
 		palette: {
@@ -15,13 +15,13 @@ function App() {
 		},
 	});
 
-	function onChange(newValue: String) {
+	/*function onChange(newValue: string) {
 		console.log("change", newValue);
-	}
+	}*/
 
 	return (
 		<>
-		
+		<EditorProvider>
 			<div className="title-bar electrobun-webkit-app-region-drag" style={{width: "100%"}}>
     			{/*<span className="electrobun-webkit-app-region-no-drag">code</span>*/}
 				<ThemeProvider theme={darkTheme}>
@@ -35,7 +35,7 @@ function App() {
 			</div>
 		
 			<div className="editor-container electrobun-webkit-app-region-no-drag">				
-				<AceEditor
+				{/*<AceEditor
 					className="electrobun-webkit-app-region-no-drag"
 					placeholder="Your qcodelicious..."
 					width="100%"
@@ -60,8 +60,10 @@ function App() {
 					enableMobileMenu: true,
 					showLineNumbers: true,
 					tabSize: 2,
-					}}/>
+					}}/>*/}
+					<MainEditor/>
 			</div>
+		</EditorProvider>
 		</>
 	);
 }
