@@ -117,7 +117,7 @@ export function MenuItem(
     <Menu.Item
       render={
         <ListItemButton
-          dense
+          dense          
           sx={[{ gap: 1.5 }, ...(Array.isArray(sx) ? sx : [sx])]}
         />
       }

@@ -1,2 +1,3 @@
-export { default as AppMenuBar } from './AppMenuBar.tsx';
-export { default as Ranger } from './Ranger.tsx';
+export { default as AppMenuBar } from './AppMenuBar';
+export { default as Ranger } from './Ranger';
+export { default as MainEditor } from './MainEditor';

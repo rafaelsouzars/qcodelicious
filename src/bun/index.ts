@@ -1,4 +1,5 @@
-import { BrowserWindow, Updater } from "electrobun/bun";
+import { BrowserWindow, BrowserView, Updater, Utils } from "electrobun/bun";
+import { type AppRPCSchema } from "../shared/types"
 
 const DEV_SERVER_PORT = 5173;
 const DEV_SERVER_URL = `http://localhost:${DEV_SERVER_PORT}`;
@@ -20,7 +21,76 @@ async function getMainViewUrl(): Promise<string> {
 	return "views://mainview/index.html";
 }
 
-// Create the main application window
+// Abre um canal RPC
+const appRPC = BrowserView.defineRPC<AppRPCSchema>({
+  maxRequestTime: 10000,
+  handlers: {
+    requests: {
+      openFile: async () => {
+        // Aciona o diálogo nativo do sistema operacional        
+		try {
+			const paths = await Utils.openFileDialog({
+				startingFolder: Utils.paths.home,
+				allowedFileTypes: "*",
+				// allowedFileTypes: "png,jpg",
+				canChooseFiles: true,
+				canChooseDirectory: false,
+				allowsMultipleSelection: false,
+			});
+			
+			if (!paths || paths.length === 0) return null;
+			
+			const filePath = paths[0];
+			const content = await Bun.file(filePath).text();			 
+			return { content, filePath };
+		}
+		catch (error) {
+			console.log("Erro na chamada de função no Back-end.");
+			return null;
+		}
+      },
+      
+      saveFile: async ({ filePath, content }) => {
+        let targetPath = filePath;
+        
+        // Se for um arquivo novo, pergunta onde salvar
+        if (!targetPath) {
+          const selectedPath = await Utils.openFileDialog({            
+			startingFolder: Utils.paths.home,
+			allowedFileTypes: "txt",
+			// allowedFileTypes: "png,jpg",
+			canChooseFiles: false,
+			canChooseDirectory: true,
+			allowsMultipleSelection: false,
+          });
+
+		  targetPath = selectedPath ? selectedPath[0] : null;
+        }
+        
+        if (!targetPath) return null;
+        
+        await Bun.write(targetPath, content);
+        return { filePath: targetPath };
+      },
+
+	  closeWindow: async () => {
+		try {
+			appMainWindow.close();			
+		}
+		catch (error) {
+			console.error("Fala ao fecha a janela.")
+		}
+	  }
+    },
+    messages: {
+		logFromUI: ({ message }) => {
+			console.log('[Front-end log]: ', message);
+		}
+	}
+  }
+});
+
+// Criando janela principal da aplicação
 const url = await getMainViewUrl();
 
 const appMainWindow = new BrowserWindow({
@@ -33,16 +103,22 @@ const appMainWindow = new BrowserWindow({
 		y: 40,		
 	},			
 	transparent: true,
+	rpc: appRPC,
 });
 
+export const appWebview = appMainWindow.webview;
+
+// Habilitando o auto resize
 appMainWindow.webview.autoResize = true;
 
+// Monitora o evento loding do front-end
 appMainWindow.webview.on("dom-ready", () => {
 	// GAMBIARRA: Força o alinhamento de dimensões do webview no boot inicial
 	const size = appMainWindow.getSize();
 	appMainWindow.setSize(size.width - 0.5, size.height - 0.5);	
 });
 
+// Monitora o evento de resize da janela do app
 appMainWindow.on("resize", (e: any) => {
 	const MIN_WIDTH_SIZE = 380;
 	const MIN_HEIGHT_SIZE = 380;
@@ -64,5 +140,6 @@ appMainWindow.on("resize", (e: any) => {
 	
 });
 
-
 console.log("qCodelicious start");
+
+

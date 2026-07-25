@@ -1,4 +1,6 @@
-//import * as React from 'react';
+import { useEditor } from '../contexts/index';
+import { electrobun } from '../lib/electrobun'
+
 import {
   Menubar,
   MenuRoot,
@@ -12,7 +14,21 @@ import {
   MenuSubmenuTrigger,
 } from './MenuBar.tsx';
 
-export default function AppMenubar() {
+
+export default function AppMenubar() {  
+  // Pega as ações diretamente do contexto
+  const { handleNew, handleOpen, handleSave, filePath } = useEditor();  
+
+  async function handleCloseWindow() {
+
+    try {
+      await electrobun.rpc?.request.closeWindow();
+    }
+    catch (error) {
+      console.error("❌ [RPC Error]: Erro ao chamar closeWindow:", error);
+    }
+  }
+
   return (
     <Menubar>
       <MenuRoot>
@@ -20,10 +36,10 @@ export default function AppMenubar() {
         <MenuPortal>
           <MenuPositioner sideOffset={4} alignOffset={-2}>
             <MenuPopup>
-              <MenuItem>New</MenuItem>
-              <MenuItem>Open…</MenuItem>
-              <MenuItem>Save</MenuItem>
-              <MenuItem>Save as…</MenuItem>
+              <MenuItem onClick={handleNew}>New</MenuItem>
+              <MenuItem onClick={handleOpen}>Open…</MenuItem>
+              <MenuItem onClick={handleSave}>Save {filePath ? `(${filePath.split('/').pop()})` : ''}</MenuItem>
+              <MenuItem onClick={handleSave}>Save as…</MenuItem>
               <MenuSeparator />
               <MenuSubmenuRoot>
                 <MenuSubmenuTrigger>Share</MenuSubmenuTrigger>
@@ -37,7 +53,7 @@ export default function AppMenubar() {
                 </MenuPortal>
               </MenuSubmenuRoot>
               <MenuSeparator />
-              <MenuItem>Close</MenuItem>
+              <MenuItem onClick={handleCloseWindow}>Close</MenuItem>
             </MenuPopup>
           </MenuPositioner>
         </MenuPortal>
