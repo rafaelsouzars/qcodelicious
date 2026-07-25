@@ -2,8 +2,8 @@ import { ElectrobunConfig } from "electrobun";
 
 export default {
 	app: {
-		name: "react-tailwind-vite",
-		identifier: "reacttailwindvite.electrobun.dev",
+		name: "qcodelicious",
+		identifier: "com.rafaelsouzars.qcodelicious",
 		version: "0.0.1",
 	},
 	build: {
@@ -18,10 +18,10 @@ export default {
 			bundleCEF: false,
 		},
 		linux: {
-			bundleCEF: false,
+			bundleCEF: true,
 		},
 		win: {
-			bundleCEF: false,
+			bundleCEF: true,
 		},
 	},
 } satisfies ElectrobunConfig;

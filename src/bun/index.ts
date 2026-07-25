@@ -1,5 +1,6 @@
 import { BrowserWindow, BrowserView, Updater, Utils } from "electrobun/bun";
 import { type AppRPCSchema } from "../shared/types"
+import { isEmpty } from "@mui/material";
 
 const DEV_SERVER_PORT = 5173;
 const DEV_SERVER_URL = `http://localhost:${DEV_SERVER_PORT}`;
@@ -36,16 +37,22 @@ const appRPC = BrowserView.defineRPC<AppRPCSchema>({
 				canChooseFiles: true,
 				canChooseDirectory: false,
 				allowsMultipleSelection: false,
-			});
+			});			
 			
-			if (!paths || paths.length === 0) return null;
+			if (Array.isArray(paths) && isEmpty(paths[0])) {
+				console.log("[Channel RPC] - openFile cancelado.")
+				return null;
+			}
+			else {
+				const filePath = paths[0];				
+				const content = await Bun.file(filePath).text();					
+				//const content = "Hello test";		 
+				return { content, filePath };
+			}			
 			
-			const filePath = paths[0];
-			const content = await Bun.file(filePath).text();			 
-			return { content, filePath };
 		}
 		catch (error) {
-			console.log("Erro na chamada de função no Back-end.");
+			console.error("[Channel RCP] - Erro na chamada de openFile: ", error);
 			return null;
 		}
       },
@@ -93,6 +100,10 @@ const appRPC = BrowserView.defineRPC<AppRPCSchema>({
 // Criando janela principal da aplicação
 const url = await getMainViewUrl();
 
+const MIN_WIDTH_SIZE = 380;
+const MIN_HEIGHT_SIZE = 380;
+
+// Windows and MacOSX render
 const appMainWindow = new BrowserWindow({
 	title: "qCodelicious",
 	url,	
@@ -104,9 +115,8 @@ const appMainWindow = new BrowserWindow({
 	},			
 	transparent: true,
 	rpc: appRPC,
+	renderer: "cef",
 });
-
-export const appWebview = appMainWindow.webview;
 
 // Habilitando o auto resize
 appMainWindow.webview.autoResize = true;
@@ -119,9 +129,7 @@ appMainWindow.webview.on("dom-ready", () => {
 });
 
 // Monitora o evento de resize da janela do app
-appMainWindow.on("resize", (e: any) => {
-	const MIN_WIDTH_SIZE = 380;
-	const MIN_HEIGHT_SIZE = 380;
+appMainWindow.on("resize", (e: any) => {	
 	let currentSize = appMainWindow.getSize();
 	let isLimiter = false;	
 	
@@ -139,6 +147,7 @@ appMainWindow.on("resize", (e: any) => {
 	}
 	
 });
+
 
 console.log("qCodelicious start");
 
