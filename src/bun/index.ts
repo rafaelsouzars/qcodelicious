@@ -44,9 +44,15 @@ const appRPC = BrowserView.defineRPC<AppRPCSchema>({
 				return null;
 			}
 			else {
-				const filePath = paths[0];				
-				const content = await Bun.file(filePath).text();					
-				//const content = "Hello test";		 
+				const filePath = paths[0];	
+				// Lê os bytes brutos do arquivo			
+				const file = Bun.file(filePath);
+				const arrayBuffer = await file.arrayBuffer();
+
+				// Decodifica tolerando caracteres de diferentes encodings sem estourar exceção
+				const decoder = new TextDecoder("utf-8", { fatal: false });
+				const content = decoder.decode(arrayBuffer);
+						 
 				return { content, filePath };
 			}			
 			
@@ -64,11 +70,11 @@ const appRPC = BrowserView.defineRPC<AppRPCSchema>({
         if (!targetPath) {
           const selectedPath = await Utils.openFileDialog({            
 			startingFolder: Utils.paths.home,
-			allowedFileTypes: "txt",
+			allowedFileTypes: "*",
 			// allowedFileTypes: "png,jpg",
-			canChooseFiles: false,
-			canChooseDirectory: true,
-			allowsMultipleSelection: false,
+			canChooseFiles: true,
+			canChooseDirectory: false,
+			allowsMultipleSelection: false,			
           });
 
 		  targetPath = selectedPath ? selectedPath[0] : null;

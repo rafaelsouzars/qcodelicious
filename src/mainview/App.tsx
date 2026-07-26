@@ -1,5 +1,5 @@
 import { AppMenuBar, MainEditor, Ranger } from './components/index';
-import { EditorProvider } from './contexts/EditorContext';
+import { EditorProvider } from './contexts/index';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 //import CssBaseline from '@mui/material/CssBaseline';

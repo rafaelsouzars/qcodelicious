@@ -1,1 +1,1 @@
-export { useEditor } from './EditorContext';
+export { useEditor, EditorProvider } from './EditorContext';
