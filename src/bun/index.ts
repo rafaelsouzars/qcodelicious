@@ -24,7 +24,7 @@ async function getMainViewUrl(): Promise<string> {
 
 // Abre um canal RPC
 const appRPC = BrowserView.defineRPC<AppRPCSchema>({
-  maxRequestTime: 10000,
+  maxRequestTime: 300000,
   handlers: {
     requests: {
       openFile: async () => {
