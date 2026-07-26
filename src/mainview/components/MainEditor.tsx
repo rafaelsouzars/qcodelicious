@@ -1,13 +1,47 @@
 import AceEditor from "react-ace";
 import { useEditor } from "../contexts/index";
 
-// Ace Editor Builds
+// Ace Editor themes
 import "ace-builds/src-min-noconflict/theme-twilight";
 import "ace-builds/src-min-noconflict/ext-language_tools";
 
+// Ace Editor modes
+import "ace-builds/src-min-noconflict/mode-javascript";
+import "ace-builds/src-min-noconflict/mode-html";
+import "ace-builds/src-min-noconflict/mode-css";
+import "ace-builds/src-min-noconflict/mode-json";
+import "ace-builds/src-min-noconflict/mode-text";
+
+// Função para detectar o modo do Ace com base na extensão do arquivo
+function getAceMode(filePath: string | null): string {
+  if (!filePath) return "javascript";
+  
+  const extension = filePath.split('.').pop()?.toLowerCase();
+
+  switch (extension) {
+    case 'html':
+    case 'htm':
+      return 'html';
+    case 'css':
+      return 'css';
+    case 'json':
+      return 'json';
+    case 'js':
+    case 'jsx':
+    case 'ts':
+    case 'tsx':
+      return 'javascript';
+    default:
+      return 'text'; // Fallback seguro para arquivos de texto genéricos (.txt, .log, etc.)
+  }
+}
+
 export default function MainEditor() {
   // Consome o conteúdo e a função de atualizar do Contexto
-  const { fileContent, setFileContent } = useEditor();
+  const { fileContent, filePath, setFileContent } = useEditor();
+
+  // Detecta o modo dinamicamente a partir do caminho do arquivo
+  const currentMode = getAceMode(filePath);
 
   return (
     <div className="editor-container electrobun-webkit-app-region-no-drag">          
@@ -16,16 +50,16 @@ export default function MainEditor() {
         placeholder="Your qcodelicious..."
         width="100%"
         height="100%"                   
-        mode="javascript"
+        mode={currentMode}
         theme="twilight"
-        name="UNIQUE_ID_OF_DIV"        
+        name="qcodelicious"        
         onChange={(newValue) => setFileContent(newValue)} // Atualiza o estado global ao digitar
         value={fileContent}                               // Reflete o texto carregado do arquivo
         fontSize={14}
         lineHeight={19}
         showPrintMargin={false}
         showGutter={true}
-        highlightActiveLine={true}
+        highlightActiveLine={true}        
         setOptions={{
           enableBasicAutocompletion: true,
           enableLiveAutocompletion: true,
@@ -33,6 +67,7 @@ export default function MainEditor() {
           enableMobileMenu: true,
           showLineNumbers: true,
           tabSize: 2,
+          useWorker: false,
         }}
       />
     </div>
