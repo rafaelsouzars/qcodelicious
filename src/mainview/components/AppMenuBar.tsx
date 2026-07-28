@@ -17,7 +17,7 @@ import {
 
 export default function AppMenubar() {  
   // Pega as ações diretamente do contexto
-  const { handleNew, handleOpen, handleSave, filePath } = useEditor();  
+  const { handleNew, handleOpen, handleSave, handleSaveAs, filePath } = useEditor();  
 
   async function handleCloseWindow() {
 
@@ -38,8 +38,8 @@ export default function AppMenubar() {
             <MenuPopup>
               <MenuItem onClick={handleNew}>New</MenuItem>
               <MenuItem onClick={handleOpen}>Open…</MenuItem>
-              <MenuItem onClick={handleSave}>Save {filePath ? `(${filePath.split('/').pop()})` : ''}</MenuItem>
-              <MenuItem onClick={handleSave}>Save as…</MenuItem>
+              <MenuItem onClick={handleSave}>Save {filePath ? `(${filePath.split(/[\\\/]/).pop()})` : ''}</MenuItem>
+              <MenuItem onClick={handleSaveAs}>Save as…</MenuItem>
               <MenuSeparator />
               <MenuSubmenuRoot>
                 <MenuSubmenuTrigger>Share</MenuSubmenuTrigger>

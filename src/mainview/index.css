@@ -79,3 +79,7 @@ html, body {
 .titlebar .clickable-icon {
 -webkit-app-region: no-drag;
 }
+
+.swal-title {
+  font-family: Arial, Helvetica, sans-serif;
+}
