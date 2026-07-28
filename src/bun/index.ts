@@ -1,6 +1,7 @@
 import { BrowserWindow, BrowserView, Updater, Utils } from "electrobun/bun";
 import { type AppRPCSchema } from "../shared/types"
 import { isEmpty } from "@mui/material";
+import { join } from 'path';
 
 const DEV_SERVER_PORT = 5173;
 const DEV_SERVER_URL = `http://localhost:${DEV_SERVER_PORT}`;
@@ -44,7 +45,8 @@ const appRPC = BrowserView.defineRPC<AppRPCSchema>({
 				return null;
 			}
 			else {
-				const filePath = paths[0];	
+				const filePath = paths[0];
+				const fileName = filePath.split(/[\\\/]/).pop();	
 				// Lê os bytes brutos do arquivo			
 				const file = Bun.file(filePath);
 				const arrayBuffer = await file.arrayBuffer();
@@ -53,7 +55,7 @@ const appRPC = BrowserView.defineRPC<AppRPCSchema>({
 				const decoder = new TextDecoder("utf-8", { fatal: false });
 				const content = decoder.decode(arrayBuffer);
 						 
-				return { content, filePath };
+				return { content, filePath, fileName };
 			}			
 			
 		}
@@ -72,8 +74,8 @@ const appRPC = BrowserView.defineRPC<AppRPCSchema>({
 			startingFolder: Utils.paths.home,
 			allowedFileTypes: "*",
 			// allowedFileTypes: "png,jpg",
-			canChooseFiles: true,
-			canChooseDirectory: false,
+			canChooseFiles: false,
+			canChooseDirectory: true,
 			allowsMultipleSelection: false,			
           });
 
@@ -84,6 +86,38 @@ const appRPC = BrowserView.defineRPC<AppRPCSchema>({
         
         await Bun.write(targetPath, content);
         return { filePath: targetPath };
+      },
+
+	  saveAsFile: async ({ fileName, content }) => {        
+        
+        // Seleciona a pasta para salvar
+        try {
+			const selectedPath = await Utils.openFileDialog({            
+				startingFolder: Utils.paths.home,
+				allowedFileTypes: "*",
+				// allowedFileTypes: "png,jpg",
+				canChooseFiles: false,
+				canChooseDirectory: true,
+				allowsMultipleSelection: false,			
+			});
+
+			//targetPath = selectedPath ? selectedPath[0] : null;
+
+			if (Array.isArray(selectedPath) && isEmpty(selectedPath[0])) {
+				return null;
+			}
+			else {				
+				const filePathSave = join(selectedPath[0],fileName);
+				await Bun.write(filePathSave, content);
+        		return { filePath: filePathSave, fileName };
+			}
+
+		}
+		catch (error) {
+			console.error("[Channel RCP] - Erro na chamada de saveAsFile: ", error);
+			return null;
+		}
+		
       },
 
 	  closeWindow: async () => {

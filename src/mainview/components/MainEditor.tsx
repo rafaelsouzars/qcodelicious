@@ -6,6 +6,8 @@ import "ace-builds/src-min-noconflict/theme-twilight";
 import "ace-builds/src-min-noconflict/ext-language_tools";
 
 // Ace Editor modes
+import "ace-builds/src-min-noconflict/mode-php";
+import "ace-builds/src-min-noconflict/mode-python";
 import "ace-builds/src-min-noconflict/mode-javascript";
 import "ace-builds/src-min-noconflict/mode-html";
 import "ace-builds/src-min-noconflict/mode-css";
@@ -31,6 +33,10 @@ function getAceMode(filePath: string | null): string {
     case 'ts':
     case 'tsx':
       return 'javascript';
+    case 'php':
+      return 'php';
+    case 'py':
+      return 'python';
     default:
       return 'text'; // Fallback seguro para arquivos de texto genéricos (.txt, .log, etc.)
   }
@@ -38,7 +44,7 @@ function getAceMode(filePath: string | null): string {
 
 export default function MainEditor() {
   // Consome o conteúdo e a função de atualizar do Contexto
-  const { fileContent, filePath, setFileContent } = useEditor();
+  const { fileContent, filePath, handleLoad, handleChangeContent } = useEditor();
 
   // Detecta o modo dinamicamente a partir do caminho do arquivo
   const currentMode = getAceMode(filePath);
@@ -52,8 +58,9 @@ export default function MainEditor() {
         height="100%"                   
         mode={currentMode}
         theme="twilight"
-        name="qcodelicious"        
-        onChange={(newValue) => setFileContent(newValue)} // Atualiza o estado global ao digitar
+        name="qcodelicious" 
+        onLoad={handleLoad}       
+        onChange={(newValue) => handleChangeContent(newValue)} // Atualiza o estado global ao digitar
         value={fileContent}                               // Reflete o texto carregado do arquivo
         fontSize={14}
         lineHeight={19}

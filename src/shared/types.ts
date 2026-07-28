@@ -5,14 +5,21 @@ export type AppRPCSchema = {
          requests: {
             openFile: {
                 params: void;
-                response: { content: string; filePath: string } | null;
+                response: { content: string; filePath: string; fileName: string | undefined; } | null;
             };
             saveFile: {
                 params: { 
                     filePath: string | null;                                      
                     content: string; 
                 };
-                response: { filePath: string } | null;
+                response: { filePath: string; } | null;
+            };
+            saveAsFile: {
+                params: { 
+                    fileName: string;                                      
+                    content: string; 
+                };
+                response: { filePath: string; fileName: string; } | null;
             };
             closeWindow: {
                 params: void;
