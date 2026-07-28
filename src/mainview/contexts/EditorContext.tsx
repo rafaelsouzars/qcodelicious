@@ -126,52 +126,71 @@ export function EditorProvider({ children }: { children: ReactNode }) {
   async function handleSave() {
     console.log("👉 [UI] Salvando arquivo...");
     try {
-      const result = await electrobun.rpc?.request.saveFile({
-        filePath,
-        content: fileContent,
-      });
-
-      if (result) {
-        console.log("👉 Arquivo salvo com sucesso em:", result.filePath);
-        setFilePath(result.filePath);
-        setIsChange(false);
-        if (isNewFile) setIsNewFile(false);
-
-        Swal.fire({
-          title: "Saved!", 
-          icon: "success", 
-          theme: "dark",
-          customClass: {
-            title: 'swal-title',
-          }
-        });
+      // Caso seja um novo arquivo
+      if (isNewFile) {
+        handleSaveAs();
       }
+      else {
+        // Caso seja um arquivo aberto
+        const result = await electrobun.rpc?.request.saveFile({
+          filePath,
+          content: fileContent,
+        });
+
+        if (result) {
+          console.log("👉 Arquivo salvo com sucesso em:", result.filePath);
+          setFilePath(result.filePath);
+          setIsChange(false);
+          if (isNewFile) setIsNewFile(false);
+
+          Swal.fire({
+            title: "Saved!", 
+            icon: "success", 
+            theme: "dark",
+            customClass: {
+              title: 'swal-title',
+            }
+          });
+        }
+      }      
     } catch (error) {
       console.error("❌ [RPC Error] Erro ao salvar arquivo:", error);
     }
+
   }
 
   // Função "salvar como" para arquivo atual via RPC
   async function handleSaveAs() {
     console.log("👉 [UI] Salvando arquivo...");
     try {
-
+      // Abre a janela para renomear o arquivo
       Swal.fire({
-        title: "Save As...",
+        title: "Save file...",
         input: "text",
+        theme: "dark",
+        customClass: {
+          title: "swal-title",          
+        },
         inputLabel: "Name file",
+        inputPlaceholder: "Insert a name file. Example: 'code.txt'",
         inputValue: fileName,
         showCancelButton: true,
         inputValidator: (value) => {
-          if (!value) return "You need to write something!";
+          // Validação de nome de arquivo
+          const regexFileName = /^([.]?[^<>:"\/\\|?][a-zA-Z0-9-_]+)+(([.]([a-zA-Z0-9]){1,5})?)$/gm;
+
+          if (!value || !value.match(regexFileName)) return "You need to write something!"; 
+
         }
       }).then(async (result) => {
+        // Caso seja confirmado o salvamento
         if (result.isConfirmed) {
           const resultRPC = await electrobun.rpc?.request.saveAsFile({
             fileName: result.value,
             content: fileContent,
           });
 
+          // Se houver retorno do RPC saveAsFile
           if (resultRPC) {
             console.log("👉 Arquivo salvo com sucesso em:", resultRPC.filePath);
             setFileName(resultRPC.fileName);
@@ -188,7 +207,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
               }
             });
           }
-          else {
+          else {            
             Swal.fire({
               title: "Changes are not saved", 
               icon: "warning", 
@@ -199,7 +218,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
             })
           }
         }
-        else if (result.isDismissed) {
+        else if (result.isDismissed) { 
           Swal.fire({
             title: "Changes are not saved", 
             icon: "warning", 
