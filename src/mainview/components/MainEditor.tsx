@@ -6,13 +6,192 @@ import "ace-builds/src-min-noconflict/theme-twilight";
 import "ace-builds/src-min-noconflict/ext-language_tools";
 
 // Ace Editor modes
-import "ace-builds/src-min-noconflict/mode-php";
-import "ace-builds/src-min-noconflict/mode-python";
-import "ace-builds/src-min-noconflict/mode-javascript";
-import "ace-builds/src-min-noconflict/mode-html";
+import "ace-builds/src-min-noconflict/mode-abap";
+import "ace-builds/src-min-noconflict/mode-abc";
+import "ace-builds/src-min-noconflict/mode-actionscript";
+import "ace-builds/src-min-noconflict/mode-ada";
+import "ace-builds/src-min-noconflict/mode-alda";
+import "ace-builds/src-min-noconflict/mode-apache_conf";
+import "ace-builds/src-min-noconflict/mode-apex";
+import "ace-builds/src-min-noconflict/mode-applescript";
+import "ace-builds/src-min-noconflict/mode-aql";
+import "ace-builds/src-min-noconflict/mode-asciidoc";
+import "ace-builds/src-min-noconflict/mode-asl";
+import "ace-builds/src-min-noconflict/mode-assembly_arm32";
+import "ace-builds/src-min-noconflict/mode-assembly_x86";
+import "ace-builds/src-min-noconflict/mode-astro";
+import "ace-builds/src-min-noconflict/mode-autohotkey";
+import "ace-builds/src-min-noconflict/mode-basic";
+import "ace-builds/src-min-noconflict/mode-batchfile";
+import "ace-builds/src-min-noconflict/mode-bibtex";
+import "ace-builds/src-min-noconflict/mode-c9search";
+import "ace-builds/src-min-noconflict/mode-c_cpp";
+import "ace-builds/src-min-noconflict/mode-cedar";
+import "ace-builds/src-min-noconflict/mode-cedarschema";
+import "ace-builds/src-min-noconflict/mode-cirru";
+import "ace-builds/src-min-noconflict/mode-clojure";
+import "ace-builds/src-min-noconflict/mode-clue";
+import "ace-builds/src-min-noconflict/mode-cobol";
+import "ace-builds/src-min-noconflict/mode-coffee";
+import "ace-builds/src-min-noconflict/mode-coldfusion";
+import "ace-builds/src-min-noconflict/mode-crystal";
+import "ace-builds/src-min-noconflict/mode-csharp";
+import "ace-builds/src-min-noconflict/mode-csound_document";
+import "ace-builds/src-min-noconflict/mode-csound_orchestra";
+import "ace-builds/src-min-noconflict/mode-csound_score";
+import "ace-builds/src-min-noconflict/mode-csp";
 import "ace-builds/src-min-noconflict/mode-css";
+import "ace-builds/src-min-noconflict/mode-csv";
+import "ace-builds/src-min-noconflict/mode-curly";
+import "ace-builds/src-min-noconflict/mode-cuttlefish";
+import "ace-builds/src-min-noconflict/mode-d";
+import "ace-builds/src-min-noconflict/mode-dart";
+import "ace-builds/src-min-noconflict/mode-diff";
+import "ace-builds/src-min-noconflict/mode-django";
+import "ace-builds/src-min-noconflict/mode-dockerfile";
+import "ace-builds/src-min-noconflict/mode-dot";
+import "ace-builds/src-min-noconflict/mode-drools";
+import "ace-builds/src-min-noconflict/mode-edifact";
+import "ace-builds/src-min-noconflict/mode-eiffel";
+import "ace-builds/src-min-noconflict/mode-ejs";
+import "ace-builds/src-min-noconflict/mode-elixir";
+import "ace-builds/src-min-noconflict/mode-elm";
+import "ace-builds/src-min-noconflict/mode-erlang";
+import "ace-builds/src-min-noconflict/mode-flix";
+import "ace-builds/src-min-noconflict/mode-forth";
+import "ace-builds/src-min-noconflict/mode-fortran";
+import "ace-builds/src-min-noconflict/mode-fsharp";
+import "ace-builds/src-min-noconflict/mode-fsl";
+import "ace-builds/src-min-noconflict/mode-ftl";
+import "ace-builds/src-min-noconflict/mode-gcode";
+import "ace-builds/src-min-noconflict/mode-gherkin";
+import "ace-builds/src-min-noconflict/mode-gitignore";
+import "ace-builds/src-min-noconflict/mode-glsl";
+import "ace-builds/src-min-noconflict/mode-gobstones";
+import "ace-builds/src-min-noconflict/mode-golang";
+import "ace-builds/src-min-noconflict/mode-graphqlschema";
+import "ace-builds/src-min-noconflict/mode-groovy";
+import "ace-builds/src-min-noconflict/mode-groq";
+import "ace-builds/src-min-noconflict/mode-haml";
+import "ace-builds/src-min-noconflict/mode-handlebars";
+import "ace-builds/src-min-noconflict/mode-haskell";
+import "ace-builds/src-min-noconflict/mode-haskell_cabal";
+import "ace-builds/src-min-noconflict/mode-haxe";
+import "ace-builds/src-min-noconflict/mode-hjson";
+import "ace-builds/src-min-noconflict/mode-html";
+import "ace-builds/src-min-noconflict/mode-html_elixir";
+import "ace-builds/src-min-noconflict/mode-html_ruby";
+import "ace-builds/src-min-noconflict/mode-ini";
+import "ace-builds/src-min-noconflict/mode-io";
+import "ace-builds/src-min-noconflict/mode-ion";
+import "ace-builds/src-min-noconflict/mode-jack";
+import "ace-builds/src-min-noconflict/mode-jade";
+import "ace-builds/src-min-noconflict/mode-java";
+import "ace-builds/src-min-noconflict/mode-javascript";
+import "ace-builds/src-min-noconflict/mode-jexl";
 import "ace-builds/src-min-noconflict/mode-json";
+import "ace-builds/src-min-noconflict/mode-json5";
+import "ace-builds/src-min-noconflict/mode-jsoniq";
+import "ace-builds/src-min-noconflict/mode-jsp";
+import "ace-builds/src-min-noconflict/mode-jssm";
+import "ace-builds/src-min-noconflict/mode-jsx";
+import "ace-builds/src-min-noconflict/mode-julia";
+import "ace-builds/src-min-noconflict/mode-kotlin";
+import "ace-builds/src-min-noconflict/mode-latex";
+import "ace-builds/src-min-noconflict/mode-latte";
+import "ace-builds/src-min-noconflict/mode-less";
+import "ace-builds/src-min-noconflict/mode-liquid";
+import "ace-builds/src-min-noconflict/mode-lisp";
+import "ace-builds/src-min-noconflict/mode-livescript";
+import "ace-builds/src-min-noconflict/mode-logiql";
+import "ace-builds/src-min-noconflict/mode-logtalk";
+import "ace-builds/src-min-noconflict/mode-lsl";
+import "ace-builds/src-min-noconflict/mode-lua";
+import "ace-builds/src-min-noconflict/mode-luapage";
+import "ace-builds/src-min-noconflict/mode-lucene";
+import "ace-builds/src-min-noconflict/mode-makefile";
+import "ace-builds/src-min-noconflict/mode-mariadb";
+import "ace-builds/src-min-noconflict/mode-markdown";
+import "ace-builds/src-min-noconflict/mode-mask";
+import "ace-builds/src-min-noconflict/mode-matlab";
+import "ace-builds/src-min-noconflict/mode-maze";
+import "ace-builds/src-min-noconflict/mode-mediawiki";
+import "ace-builds/src-min-noconflict/mode-mel";
+import "ace-builds/src-min-noconflict/mode-mips";
+import "ace-builds/src-min-noconflict/mode-mixal";
+import "ace-builds/src-min-noconflict/mode-mushcode";
+import "ace-builds/src-min-noconflict/mode-mysql";
+import "ace-builds/src-min-noconflict/mode-nginx";
+import "ace-builds/src-min-noconflict/mode-nim";
+import "ace-builds/src-min-noconflict/mode-nix";
+import "ace-builds/src-min-noconflict/mode-nsis";
+import "ace-builds/src-min-noconflict/mode-nunjucks";
+import "ace-builds/src-min-noconflict/mode-objectivec";
+import "ace-builds/src-min-noconflict/mode-ocaml";
+import "ace-builds/src-min-noconflict/mode-pascal";
+import "ace-builds/src-min-noconflict/mode-perl";
+import "ace-builds/src-min-noconflict/mode-pgsql";
+import "ace-builds/src-min-noconflict/mode-php";
+import "ace-builds/src-min-noconflict/mode-php_laravel_blade";
+import "ace-builds/src-min-noconflict/mode-pig";
+import "ace-builds/src-min-noconflict/mode-plain_text";
+import "ace-builds/src-min-noconflict/mode-powershell";
+import "ace-builds/src-min-noconflict/mode-praat";
+import "ace-builds/src-min-noconflict/mode-prisma";
+import "ace-builds/src-min-noconflict/mode-prolog";
+import "ace-builds/src-min-noconflict/mode-properties";
+import "ace-builds/src-min-noconflict/mode-protobuf";
+import "ace-builds/src-min-noconflict/mode-puppet";
+import "ace-builds/src-min-noconflict/mode-python";
+import "ace-builds/src-min-noconflict/mode-qml";
+import "ace-builds/src-min-noconflict/mode-r";
+import "ace-builds/src-min-noconflict/mode-razor";
+import "ace-builds/src-min-noconflict/mode-rdoc";
+import "ace-builds/src-min-noconflict/mode-red";
+import "ace-builds/src-min-noconflict/mode-redshift";
+import "ace-builds/src-min-noconflict/mode-rhtml";
+import "ace-builds/src-min-noconflict/mode-robot";
+import "ace-builds/src-min-noconflict/mode-ruby";
+import "ace-builds/src-min-noconflict/mode-rust";
+import "ace-builds/src-min-noconflict/mode-sac";
+import "ace-builds/src-min-noconflict/mode-sass";
+import "ace-builds/src-min-noconflict/mode-scad";
+import "ace-builds/src-min-noconflict/mode-scala";
+import "ace-builds/src-min-noconflict/mode-scheme";
+import "ace-builds/src-min-noconflict/mode-scss";
+import "ace-builds/src-min-noconflict/mode-sh";
+import "ace-builds/src-min-noconflict/mode-sjs";
+import "ace-builds/src-min-noconflict/mode-slim";
+import "ace-builds/src-min-noconflict/mode-smarty";
+import "ace-builds/src-min-noconflict/mode-snippets";
+import "ace-builds/src-min-noconflict/mode-soy_template";
+import "ace-builds/src-min-noconflict/mode-space";
+import "ace-builds/src-min-noconflict/mode-sparql";
+import "ace-builds/src-min-noconflict/mode-sql";
+import "ace-builds/src-min-noconflict/mode-sqlserver";
+import "ace-builds/src-min-noconflict/mode-stylus";
+import "ace-builds/src-min-noconflict/mode-svg";
+import "ace-builds/src-min-noconflict/mode-swift";
+import "ace-builds/src-min-noconflict/mode-tcl";
+import "ace-builds/src-min-noconflict/mode-terraform";
+import "ace-builds/src-min-noconflict/mode-tex";
 import "ace-builds/src-min-noconflict/mode-text";
+import "ace-builds/src-min-noconflict/mode-textile";
+import "ace-builds/src-min-noconflict/mode-toml";
+import "ace-builds/src-min-noconflict/mode-tsx";
+import "ace-builds/src-min-noconflict/mode-turtle";
+import "ace-builds/src-min-noconflict/mode-twig";
+import "ace-builds/src-min-noconflict/mode-typescript";
+import "ace-builds/src-min-noconflict/mode-vala";
+import "ace-builds/src-min-noconflict/mode-velocity";
+import "ace-builds/src-min-noconflict/mode-verilog";
+import "ace-builds/src-min-noconflict/mode-vhdl";
+import "ace-builds/src-min-noconflict/mode-visualforce";
+import "ace-builds/src-min-noconflict/mode-wollok";
+import "ace-builds/src-min-noconflict/mode-xml";
+import "ace-builds/src-min-noconflict/mode-xquery";
+import "ace-builds/src-min-noconflict/mode-yaml";
+import "ace-builds/src-min-noconflict/mode-zeek";
 
 // Função para detectar o modo do Ace com base na extensão do arquivo
 function getAceMode(filePath: string | null): string {
@@ -21,6 +200,7 @@ function getAceMode(filePath: string | null): string {
   const extension = filePath.split('.').pop()?.toLowerCase();
 
   switch (extension) {
+    // Arquivos comuns
     case 'html':
     case 'htm':
       return 'html';
@@ -29,14 +209,472 @@ function getAceMode(filePath: string | null): string {
     case 'json':
       return 'json';
     case 'js':
-    case 'jsx':
-    case 'ts':
-    case 'tsx':
+    case 'mjs':
+    case 'cjs':
       return 'javascript';
+    case 'jsx':
+      return 'jsx';
+    case 'ts':
+    case 'typescript':
+      return 'typescript';
+    case 'tsx':
+      return 'tsx';
     case 'php':
+    case 'php3':
+    case 'php4':
+    case 'php5':
+    case 'phtml':
       return 'php';
     case 'py':
+    case 'pyw':
       return 'python';
+
+    // Adições
+    case 'abap':
+      return 'abap';
+    case 'abc':
+      return 'abc';
+    case 'as':
+    case 'actionscript':
+      return 'actionscript';
+    case 'ada':
+    case 'adb':
+    case 'ads':
+      return 'ada';
+    case 'alda':
+      return 'alda';
+    case 'apache_conf':
+    case 'conf':           
+      return 'apache_conf';
+    case 'apex':
+      return 'apex';
+    case 'applescript':
+    case 'scpt':
+      return 'applescript';
+    case 'aql':
+      return 'aql';
+    case 'asciidoc':
+    case 'adoc':
+      return 'asciidoc';
+    case 'asl':
+      return 'asl';
+    case 's':
+    case 'asm':
+    case 'arm':
+      return 'assembly_arm32';
+    case 'asm_x86':
+      return 'assembly_x86';
+    case 'astro':
+      return 'astro';
+    case 'ahk':
+    case 'autohotkey':
+      return 'autohotkey';
+    case 'bas':
+    case 'basic':
+      return 'basic';
+    case 'bat':
+    case 'cmd':
+      return 'batchfile';
+    case 'bib':
+    case 'bibtex':
+      return 'bibtex';
+    case 'c9search':
+      return 'c9search';
+    case 'c':
+    case 'cpp':
+    case 'cxx':
+    case 'h':
+    case 'hpp':
+      return 'c_cpp';
+    case 'cedar':
+      return 'cedar';
+    case 'cedarschema':
+      return 'cedarschema';
+    case 'cirru':
+      return 'cirru';
+    case 'clj':
+    case 'cljs':
+    case 'cljc':
+      return 'clojure';
+    case 'clue':
+      return 'clue';
+    case 'cob':
+    case 'cobol':
+      return 'cobol';
+    case 'coffee':
+    case 'cson':
+    case 'iced':
+      return 'coffee';
+    case 'cfm':
+    case 'cfml':
+      return 'coldfusion';
+    case 'cr':
+      return 'crystal';
+    case 'cs':
+      return 'csharp';
+    case 'csd':
+      return 'csound_document';
+    case 'orc':
+      return 'csound_orchestra';
+    case 'sco':
+      return 'csound_score';
+    case 'csp':
+      return 'csp';
+    case 'csv':
+      return 'csv';
+    case 'curly':
+      return 'curly';
+    case 'cuttlefish':
+      return 'cuttlefish';
+    case 'd':
+      return 'd';
+    case 'dart':
+      return 'dart';
+    case 'diff':
+    case 'patch':
+      return 'diff';
+    case 'django':
+    case 'jinja':
+      return 'django';
+    case 'dockerfile':
+    case 'docker':
+      return 'dockerfile';
+    case 'dot':
+      return 'dot';
+    case 'drl':
+      return 'drools';
+    case 'edi':
+    case 'edifact':
+      return 'edifact';
+    case 'e':
+    case 'eiffel':
+      return 'eiffel';
+    case 'ejs':
+      return 'ejs';
+    case 'ex':
+    case 'exs':
+      return 'elixir';
+    case 'elm':
+      return 'elm';
+    case 'erl':
+    case 'hrl':
+      return 'erlang';
+    case 'flix':
+      return 'flix';
+    case 'fth':
+    case '4th':
+    case 'forth':
+      return 'forth';
+    case 'f':
+    case 'for':
+    case 'f77':
+    case 'f90':
+      return 'fortran';
+    case 'fs':
+    case 'fsi':
+    case 'fsx':
+      return 'fsharp';
+    case 'fsl':
+      return 'fsl';
+    case 'ftl':
+      return 'ftl';
+    case 'gcode':
+    case 'nc':
+      return 'gcode';
+    case 'feature':
+      return 'gherkin';
+    case 'gitignore':
+      return 'gitignore';
+    case 'glsl':
+    case 'vert':
+    case 'frag':
+      return 'glsl';
+    case 'gobstones':
+      return 'gobstones';
+    case 'go':
+      return 'golang';
+    case 'graphql':
+    case 'gql':
+      return 'graphqlschema';
+    case 'groovy':
+    case 'gvy':
+      return 'groovy';
+    case 'groq':
+      return 'groq';
+    case 'haml':
+      return 'haml';
+    case 'hbs':
+    case 'handlebars':
+      return 'handlebars';
+    case 'hs':
+    case 'lhs':
+      return 'haskell';
+    case 'cabal':
+      return 'haskell_cabal';
+    case 'hx':
+    case 'hxml':
+      return 'haxe';
+    case 'hjson':
+      return 'hjson';
+    case 'html_eex':
+      return 'html_elixir';
+    case 'html_erb':
+      return 'html_ruby';
+    case 'ini':
+    case 'cfg':
+      return 'ini';
+    case 'io':
+      return 'io';
+    case 'ion':
+      return 'ion';
+    case 'jack':
+      return 'jack';
+    case 'jade':
+    case 'pug':
+      return 'jade';
+    case 'java':
+    case 'jav':
+      return 'java';
+    case 'jexl':
+      return 'jexl';
+    case 'json5':
+      return 'json5';
+    case 'jq':
+      return 'jsoniq';
+    case 'jsp':
+      return 'jsp';
+    case 'jssm':
+      return 'jssm';
+    case 'jl':
+      return 'julia';
+    case 'kt':
+    case 'kts':
+      return 'kotlin';
+    case 'tex':            
+    case 'latex':
+    case 'ltx':
+      return 'latex';
+    case 'latte':
+      return 'latte';
+    case 'less':
+      return 'less';
+    case 'liquid':
+      return 'liquid';
+    case 'lisp':
+    case 'lsp':
+    case 'el':
+      return 'lisp';
+    case 'ls':
+      return 'livescript';
+    case 'logic':
+      return 'logiql';
+    case 'logtalk':
+      return 'logtalk';
+    case 'lsl':
+      return 'lsl';
+    case 'lua':
+      return 'lua';
+    case 'lp':
+      return 'luapage';
+    case 'lucene':
+      return 'lucene';
+    case 'makefile':
+    case 'mk':
+    case 'mak':
+      return 'makefile';
+    case 'mariadb':
+      return 'mariadb';
+    case 'md':
+    case 'markdown':
+    case 'mdown':
+    case 'mkd':
+      return 'markdown';
+    case 'mask':
+      return 'mask';
+    case 'matlab':
+    case 'm':              
+      return 'matlab';
+    case 'maze':
+      return 'maze';
+    case 'mediawiki':
+    case 'wiki':
+      return 'mediawiki';
+    case 'mel':
+      return 'mel';
+    case 'mips':
+      return 'mips';
+    case 'mixal':
+      return 'mixal';
+    case 'mush':
+      return 'mushcode';
+    case 'mysql':
+      return 'mysql';
+    case 'nginx':          
+      return 'nginx';
+    case 'nim':
+      return 'nim';
+    case 'nix':
+      return 'nix';
+    case 'nsi':
+    case 'nsh':
+      return 'nsis';
+    case 'njk':
+    case 'nunjucks':
+      return 'nunjucks';
+    case 'mm':             
+    case 'M':
+      return 'objectivec';
+    case 'ml':
+    case 'mli':
+      return 'ocaml';
+    case 'pas':
+    case 'pascal':
+      return 'pascal';
+    case 'pl':
+    case 'pm':
+    case 't':
+      return 'perl';
+    case 'pgsql':
+      return 'pgsql';
+    case 'blade.php':
+      return 'php_laravel_blade';
+    case 'pig':
+      return 'pig';
+    case 'txt':
+    case 'text':
+      return 'plain_text';
+    case 'ps1':
+    case 'psm1':
+    case 'psd1':
+      return 'powershell';
+    case 'praat':
+      return 'praat';
+    case 'prisma':
+      return 'prisma';
+    case 'pro':
+    case 'prolog':
+      return 'prolog';
+    case 'properties':
+      return 'properties';
+    case 'proto':
+      return 'protobuf';
+    case 'pp':
+      return 'puppet';
+    case 'qml':
+      return 'qml';
+    case 'r':
+    case 'R':
+      return 'r';
+    case 'razor':
+    case 'cshtml':
+      return 'razor';
+    case 'rd':
+    case 'rdoc':
+      return 'rdoc';
+    case 'red':
+      return 'red';
+    case 'redshift':
+      return 'redshift';
+    case 'rhtml':
+      return 'rhtml';
+    case 'riscv':
+      return 'riscv';
+    case 'robot':
+      return 'robot';
+    case 'rb':
+    case 'gemspec':
+    case 'rake':
+      return 'ruby';
+    case 'rs':
+      return 'rust';
+    case 'sac':
+      return 'sac';
+    case 'sass':
+      return 'sass';
+    case 'scad':
+      return 'scad';
+    case 'scala':
+      return 'scala';
+    case 'scm':
+    case 'ss':
+      return 'scheme';
+    case 'scss':
+      return 'scss';
+    case 'sh':
+    case 'bash':
+    case 'zsh':
+    case 'ksh':
+      return 'sh';
+    case 'sjs':
+      return 'sjs';
+    case 'slim':
+      return 'slim';
+    case 'tpl':
+      return 'smarty';
+    case 'snippets':
+      return 'snippets';
+    case 'soy':
+      return 'soy_template';
+    case 'space':
+      return 'space';
+    case 'rq':
+    case 'sparql':
+      return 'sparql';
+    case 'sql':
+      return 'sql';
+    case 'sqlserver':
+      return 'sqlserver';
+    case 'styl':
+      return 'stylus';
+    case 'svg':
+      return 'svg';
+    case 'swift':
+      return 'swift';
+    case 'tcl':
+      return 'tcl';
+    case 'tf':
+    case 'tfvars':
+      return 'terraform';    
+    case 'textile':
+      return 'textile';
+    case 'toml':
+      return 'toml';
+    case 'ttl':
+      return 'turtle';
+    case 'twig':
+      return 'twig';
+    case 'vala':
+      return 'vala';
+    case 'vb':
+    case 'vbs':
+      return 'vb';
+    case 'vm':
+    case 'vtl':
+      return 'velocity';
+    case 'v':
+    case 'vh':
+    case 'sv':
+      return 'verilog';
+    case 'vhd':
+    case 'vhdl':
+      return 'vhdl';
+    case 'page':
+      return 'visualforce';
+    case 'wollok':
+      return 'wollok';
+    case 'xml':
+    case 'xsd':
+    case 'xsl':
+    case 'wsdl':
+      return 'xml';
+    case 'xq':
+    case 'xquery':
+      return 'xquery';
+    case 'yml':
+    case 'yaml':
+      return 'yaml';
+    case 'zeek':
+      return 'zeek';
     default:
       return 'text'; // Fallback seguro para arquivos de texto genéricos (.txt, .log, etc.)
   }
