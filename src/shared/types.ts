@@ -20,6 +20,13 @@ export type AppRPCSchema = {
                     content: string; 
                 };
                 response: { filePath: string; fileName: string; } | null;
+            };            
+            resizeWindow: {
+                params: {
+                    direction: "right" | "bottom" | "bottom-right";
+                    coordinate: { deltaX: number; deltaY: number; };
+                };
+                response: void;
             };
             closeWindow: {
                 params: void;
