@@ -687,13 +687,18 @@ export default function MainEditor() {
   // Detecta o modo dinamicamente a partir do caminho do arquivo
   const currentMode = getAceMode(filePath);
 
-  return (
-    <div className="editor-container electrobun-webkit-app-region-no-drag">          
+  //<div className="editor-container electrobun-webkit-app-region-no-drag">
+  //</div>
+  return (    
+    <>              
       <AceEditor
         className="electrobun-webkit-app-region-no-drag"
         placeholder="Your qcodelicious..."
         width="100%"
-        height="100%"                   
+        height="100%"
+        style={{
+          boxSizing: "border-box",          
+        }}                   
         mode={currentMode}
         theme="twilight"
         name="qcodelicious" 
@@ -714,7 +719,7 @@ export default function MainEditor() {
           tabSize: 2,
           useWorker: false,
         }}
-      />
-    </div>
+      />    
+    </>
   );
 }

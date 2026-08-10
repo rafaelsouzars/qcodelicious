@@ -14,7 +14,9 @@ interface EditorContextType {
   handleChangeContent: (newValue: string) => void;
   handleOpen: () => Promise<void>;
   handleSave: () => Promise<void>;
-  handleSaveAs: () => Promise<void>;
+  handleSaveAs: () => Promise<void>;  
+  handleResizeWindow: (direction: "right" | "bottom" | "bottom-right", coordinate: {deltaX: number, deltaY: number}) => Promise<void>;
+  handleCloseWindow: () => Promise<void>;
 }
 
 const EditorContext = createContext<EditorContextType | undefined>(undefined);
@@ -232,6 +234,30 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     } catch (error) {
       console.error("❌ [RPC Error] Erro ao salvar arquivo:", error);
     }
+  }  
+
+  async function handleResizeWindow (
+    direction: "right" | "bottom" | "bottom-right", 
+    coordinate: {
+      deltaX: number, 
+      deltaY: number
+    }
+  ) {
+    try {
+      await electrobun.rpc?.request.resizeWindow({direction: direction, coordinate});
+    }
+    catch (error) {
+      console.error("❌ [RPC Error]: Erro ao chamar resizeWindow:", error);
+    }
+  }
+
+  async function handleCloseWindow() {
+    try {
+      await electrobun.rpc?.request.closeWindow();
+    }
+    catch (error) {
+      console.error("❌ [RPC Error]: Erro ao chamar closeWindow:", error);
+    }
   }
 
   return (
@@ -247,7 +273,9 @@ export function EditorProvider({ children }: { children: ReactNode }) {
         handleChangeContent,
         handleOpen,
         handleSave,
-        handleSaveAs,
+        handleSaveAs,        
+        handleResizeWindow,
+        handleCloseWindow,
       }}
     >
       {children}

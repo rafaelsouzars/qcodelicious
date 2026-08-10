@@ -1,5 +1,4 @@
 import { useEditor } from '../contexts/index';
-import { electrobun } from '../lib/electrobun'
 
 import {
   Menubar,
@@ -17,17 +16,7 @@ import {
 
 export default function AppMenubar() {  
   // Pega as ações diretamente do contexto
-  const { handleNew, handleOpen, handleSave, handleSaveAs, filePath } = useEditor();  
-
-  async function handleCloseWindow() {
-
-    try {
-      await electrobun.rpc?.request.closeWindow();
-    }
-    catch (error) {
-      console.error("❌ [RPC Error]: Erro ao chamar closeWindow:", error);
-    }
-  }
+  const { handleNew, handleOpen, handleSave, handleSaveAs, handleCloseWindow, filePath } = useEditor();  
 
   return (
     <Menubar>

@@ -1,4 +1,4 @@
-import { BrowserWindow, BrowserView, Updater, Utils } from "electrobun/bun";
+import { BrowserWindow, BrowserView, Updater, Utils, Screen } from "electrobun/bun";
 import { type AppRPCSchema } from "../shared/types"
 import { isEmpty } from "@mui/material";
 import { join } from 'path';
@@ -118,14 +118,37 @@ const appRPC = BrowserView.defineRPC<AppRPCSchema>({
 			return null;
 		}
 		
-      },
+      },	  
+
+	  resizeWindow: async ({ direction, coordinate }) => {
+		try {
+			const currentFrame = appMainWindow.getFrame();			
+
+			let newWidth = currentFrame.width;
+			let newHeight = currentFrame.height;
+
+			if (direction === "right" || direction === "bottom-right") {
+				newWidth = Math.max(MIN_WIDTH_SIZE, currentFrame.width + coordinate.deltaX);
+			}
+
+			if (direction === "bottom" || direction === "bottom-right") {
+				newHeight = Math.max(MIN_HEIGHT_SIZE, currentFrame.height + coordinate.deltaY);
+			}
+
+			appMainWindow.setFrame(currentFrame.x, currentFrame.y, newWidth, newHeight);			
+		}
+		catch (error) {
+			console.error("[Channel RCP] - Erro na chamada de resizeWindow: ", error);
+		}
+		
+	  },
 
 	  closeWindow: async () => {
 		try {
 			appMainWindow.close();			
 		}
 		catch (error) {
-			console.error("Fala ao fecha a janela.")
+			console.error("[Channel RCP] - Erro na chamada de closeWindow: ", error);
 		}
 	  }
     },
@@ -139,55 +162,35 @@ const appRPC = BrowserView.defineRPC<AppRPCSchema>({
 
 // Criando janela principal da aplicação
 const url = await getMainViewUrl();
-
-const MIN_WIDTH_SIZE = 380;
+const MIN_WIDTH_SIZE = 520;
 const MIN_HEIGHT_SIZE = 380;
+const desktopArea = Screen.getPrimaryDisplay().workArea;
+
 
 // Windows and MacOSX render
 const appMainWindow = new BrowserWindow({
 	title: "qCodelicious",
-	url,	
+	url,
 	frame: {
-		width: 800,
-		height: 600,
-		x: 40,
-		y: 40,		
-	},			
+		x: desktopArea.width - 2,
+		y: desktopArea.height - 2,
+		width: desktopArea.width,
+		height: desktopArea.height,
+	},	
 	transparent: true,
+	titleBarStyle: "hidden",			
 	rpc: appRPC,
 	renderer: "cef",
 });
 
-// Habilitando o auto resize
-appMainWindow.webview.autoResize = true;
-
 // Monitora o evento loding do front-end
 appMainWindow.webview.on("dom-ready", () => {
-	// GAMBIARRA: Força o alinhamento de dimensões do webview no boot inicial
-	const size = appMainWindow.getSize();
-	appMainWindow.setSize(size.width - 0.5, size.height - 0.5);	
-});
 
-// Monitora o evento de resize da janela do app
-appMainWindow.on("resize", (e: any) => {	
-	let currentSize = appMainWindow.getSize();
-	let isLimiter = false;	
+	appMainWindow.webview.autoResize = true;
 	
-	if (e.data.width < MIN_WIDTH_SIZE) {
-		currentSize.width = MIN_WIDTH_SIZE;
-		isLimiter = true;
-	}
-	if (e.data.height < MIN_HEIGHT_SIZE) {
-		currentSize.height = MIN_HEIGHT_SIZE;
-		isLimiter = true;
-	}
-
-	if (isLimiter) {
-		appMainWindow.setSize(currentSize.width,currentSize.height);		
-	}
+	appMainWindow.setFrame(0, 0, 800, 600);
 	
 });
-
 
 console.log("qCodelicious start");
 
