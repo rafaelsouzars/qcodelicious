@@ -15,7 +15,10 @@ interface EditorContextType {
   handleOpen: () => Promise<void>;
   handleSave: () => Promise<void>;
   handleSaveAs: () => Promise<void>;  
-  handleResizeWindow: (direction: "right" | "bottom" | "bottom-right", coordinate: {deltaX: number, deltaY: number}) => Promise<void>;
+  handleResizeWindow: (
+    direction: "top" | "left" | "top-left" |"right" | "bottom" | "bottom-right", 
+    coordinate: {deltaX: number, deltaY: number}
+  ) => Promise<void>;
   handleCloseWindow: () => Promise<void>;
 }
 
@@ -237,7 +240,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
   }  
 
   async function handleResizeWindow (
-    direction: "right" | "bottom" | "bottom-right", 
+    direction: "top" | "left" | "top-left" | "right" | "bottom" | "bottom-right", 
     coordinate: {
       deltaX: number, 
       deltaY: number

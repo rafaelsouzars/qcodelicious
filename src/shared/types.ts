@@ -23,7 +23,7 @@ export type AppRPCSchema = {
             };            
             resizeWindow: {
                 params: {
-                    direction: "right" | "bottom" | "bottom-right";
+                    direction: "top" | "left" | "top-left" | "right" | "bottom" | "bottom-right";
                     coordinate: { deltaX: number; deltaY: number; };
                 };
                 response: void;

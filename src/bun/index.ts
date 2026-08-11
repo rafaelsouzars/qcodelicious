@@ -124,8 +124,32 @@ const appRPC = BrowserView.defineRPC<AppRPCSchema>({
 		try {
 			const currentFrame = appMainWindow.getFrame();			
 
+			let newX = currentFrame.x;
+			let newY = currentFrame.y;
 			let newWidth = currentFrame.width;
 			let newHeight = currentFrame.height;
+
+			if (direction === "left" || direction === "top-left") {
+				if (currentFrame.width > MIN_WIDTH_SIZE) {
+					newX = Math.max(0, currentFrame.x + coordinate.deltaX);
+					newWidth = Math.max(MIN_WIDTH_SIZE, currentFrame.width - coordinate.deltaX);
+				}
+				else if ((currentFrame.width = MIN_WIDTH_SIZE) && (coordinate.deltaX < 0)) {					
+					newX = Math.max(0, currentFrame.x + coordinate.deltaX);
+					newWidth = Math.max(MIN_WIDTH_SIZE, currentFrame.width - coordinate.deltaX);
+				} 				
+			}
+
+			if (direction === "top" || direction === "top-left") {
+				if (currentFrame.height > MIN_HEIGHT_SIZE) {
+					newY = Math.max(0, currentFrame.y + coordinate.deltaY);
+					newHeight = Math.max(MIN_HEIGHT_SIZE, currentFrame.height - coordinate.deltaY);
+				}
+				else if ((currentFrame.height = MIN_HEIGHT_SIZE) && (coordinate.deltaY < 0)) {
+					newY = Math.max(0, currentFrame.y + coordinate.deltaY);
+					newHeight = Math.max(MIN_HEIGHT_SIZE, currentFrame.height - coordinate.deltaY);
+				}				
+			}
 
 			if (direction === "right" || direction === "bottom-right") {
 				newWidth = Math.max(MIN_WIDTH_SIZE, currentFrame.width + coordinate.deltaX);
@@ -135,7 +159,7 @@ const appRPC = BrowserView.defineRPC<AppRPCSchema>({
 				newHeight = Math.max(MIN_HEIGHT_SIZE, currentFrame.height + coordinate.deltaY);
 			}
 
-			appMainWindow.setFrame(currentFrame.x, currentFrame.y, newWidth, newHeight);			
+			appMainWindow.setFrame(newX, newY, newWidth, newHeight);			
 		}
 		catch (error) {
 			console.error("[Channel RCP] - Erro na chamada de resizeWindow: ", error);
