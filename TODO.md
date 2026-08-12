@@ -6,8 +6,8 @@ qCodelicious Code Editor Project
 
 - [x] Add resizer bar top and left. ✅
 - [x] Add new style scrollbar editor. ✅
-- [ ] Footer
-- [ ] Realocator opacity control
+- [x] Footer. ✅
+- [x] Realocator opacity control. ✅
 - [ ] Window Control Buttons (Max, Min and Close)
 - [ ] Docker screen function
 - [ ] Fix Open and Close file editable state

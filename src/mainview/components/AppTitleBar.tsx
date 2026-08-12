@@ -1,4 +1,3 @@
-import Ranger from './Ranger'
 import { useEditor } from '../contexts/index';
 import AppMenuBar from './AppMenuBar';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -22,10 +21,9 @@ const AppTitleBar = () => {
         <span className="electrobun-webkit-app-region-no-drag">
           <span className="electrobun-webkit-app-region-no-drag">{isChange ? '*' : ''}</span>{fileName}
         </span>
-        {/* Controle de Transparência */}
+        {/* Controles da janela */}
         <div className="controls electrobun-webkit-app-region-no-drag">
-            <label htmlFor="opacity-slider electrobun-webkit-app-region-no-drag">Opacidade:</label>
-            <Ranger/>
+            Window Controls
         </div>
       </div>
     </>
