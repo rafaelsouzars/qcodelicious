@@ -7,8 +7,10 @@ interface EditorContextType {
   filePath: string | null;
   fileContent: string;
   fileName: string;
-  isChange: boolean;  
+  isChange: boolean; 
+  editorMode: string; 
   setFileContent: (content: string) => void;
+  setEditorMode: (mode: string) => void;
   handleLoad: () => void;
   handleNew: () => void;
   handleChangeContent: (newValue: string) => void;
@@ -33,12 +35,14 @@ export function EditorProvider({ children }: { children: ReactNode }) {
   const [newFileCounter, setNewFileCounter] = useState<number>(0);
   const [isNewFile, setIsNewFile] = useState<boolean>(false);
   const [isChange, setIsChange] = useState<boolean>(false);
+  const [editorMode, setEditorMode] = useState<string>("");
   
   const newEditorFile = () => {
     setFilePath(null);
     setFileContent(DEFAULT_NEW_FILE_CONTENT);
     setNewFileCounter(newFileCounter + 1);
     setFileName(`untilited${newFileCounter}.txt`);
+    setEditorMode("text");
     setIsNewFile(true);
     setIsChange(false);
   };
@@ -270,7 +274,9 @@ export function EditorProvider({ children }: { children: ReactNode }) {
         fileContent,
         fileName,
         isChange,
+        editorMode,
         setFileContent,
+        setEditorMode,
         handleLoad,
         handleNew,
         handleChangeContent,
