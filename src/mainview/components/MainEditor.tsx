@@ -195,7 +195,7 @@ import "ace-builds/src-min-noconflict/mode-zeek";
 
 // Função para detectar o modo do Ace com base na extensão do arquivo
 function getAceMode(filePath: string | null): string {
-  if (!filePath) return "javascript";
+  if (!filePath) return 'text';
   
   const extension = filePath.split('.').pop()?.toLowerCase();
 

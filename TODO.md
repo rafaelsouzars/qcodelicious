@@ -4,13 +4,13 @@ qCodelicious Code Editor Project
 
 ## Features
 
-- [x] Add resizer bar top and left.
-- [ ] Add new style scrollbar editor
+- [x] Add resizer bar top and left. ✅
+- [x] Add new style scrollbar editor. ✅
+- [ ] Footer
 - [ ] Realocator opacity control
 - [ ] Window Control Buttons (Max, Min and Close)
 - [ ] Docker screen function
 - [ ] Fix Open and Close file editable state
-- [ ] Footer
 - [ ] App icons
 - [ ] About window
 - [ ] Config file
