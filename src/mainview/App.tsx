@@ -1,4 +1,4 @@
-import { AppTitleBar, MainEditor, Resizer } from './components/index';
+import { AppTitleBar, MainEditor, Footer, Resizer } from './components/index';
 import { EditorProvider} from './contexts/index';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
@@ -10,6 +10,7 @@ function App() {
 		<EditorProvider>
 			<AppTitleBar/>					
 			<MainEditor/>
+			<Footer/>
 			<Resizer/>		
 		</EditorProvider>
 		</>

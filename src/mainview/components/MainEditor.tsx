@@ -682,10 +682,10 @@ function getAceMode(filePath: string | null): string {
 
 export default function MainEditor() {
   // Consome o conteúdo e a função de atualizar do Contexto
-  const { fileContent, filePath, handleLoad, handleChangeContent } = useEditor();
+  const { fileContent, filePath, editorMode, setEditorMode, handleLoad, handleChangeContent } = useEditor();
 
   // Detecta o modo dinamicamente a partir do caminho do arquivo
-  const currentMode = getAceMode(filePath);
+  setEditorMode(getAceMode(filePath));
 
   //<div className="editor-container electrobun-webkit-app-region-no-drag">
   //</div>
@@ -699,7 +699,7 @@ export default function MainEditor() {
         style={{
           boxSizing: "border-box",          
         }}                   
-        mode={currentMode}
+        mode={editorMode}
         theme="twilight"
         name="qcodelicious" 
         onLoad={handleLoad}       
