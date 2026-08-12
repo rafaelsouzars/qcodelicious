@@ -72,6 +72,46 @@ html, body {
   /*border: solid 1px white;*/
 }
 
+/* Remove as bordas ou fundos padrões das barras do Ace */
+.ace_scrollbar {
+    background: transparent !important;
+    opacity: 0.5 !important;
+    transition: opacity 0.4s ease-in-out !important; 
+}
+
+.ace_scrollbar:hover {
+    opacity: 1 !important;
+}
+
+/* Estiliza a barra de rolagem vertical interna */
+.ace_scrollbar-v {
+    width: 12px !important;
+}
+
+/* Estiliza a barra de rolagem horizontal interna */
+.ace_scrollbar-h {
+    height: 12px !important;
+}
+
+/* Estiliza o "polegar" (ponteiro/cursor) da barra usando WebKit se necessário. */
+.ace_scrollbar::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.ace_scrollbar::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+.ace_scrollbar::-webkit-scrollbar-thumb {
+    background: #52525b !important;
+    border-radius: 10px;    
+}
+
+.ace_scrollbar::-webkit-scrollbar-thumb:hover {  
+  background: #71717a !important;    
+}
+
 .ace-twilight .ace_gutter {
     background: transparent !important;
 }
