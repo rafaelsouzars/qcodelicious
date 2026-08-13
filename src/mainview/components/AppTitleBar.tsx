@@ -3,6 +3,8 @@ import { useEditor } from '../contexts/index';
 import AppMenuBar from './AppMenuBar';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
+import PictureInPictureAltIcon from '@mui/icons-material/PictureInPictureAlt';
+import PinEndIcon from '@mui/icons-material/PinEnd';
 import MinimizeIcon from '@mui/icons-material/Minimize';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
@@ -19,7 +21,9 @@ const AppTitleBar = () => {
     const { 
       fileName, 
       isChange, 
-      isMaximized, 
+      isMaximized,
+      isAnchored,
+      toogleAnchoreWindow, 
       handleMaximizeWindow, 
       handleMinimizeWindow, 
       handleCloseWindow 
@@ -49,16 +53,21 @@ const AppTitleBar = () => {
   return (
     <>
     
-      <div className={`title-bar ${isMaximized ? 'electrobun-webkit-app-region-no-drag' : 'electrobun-webkit-app-region-drag'}`} style={{width: "100%"}}>    			
+      <div className={`title-bar ${isMaximized ? 'electrobun-webkit-app-region-no-drag' : 'electrobun-webkit-app-region-drag'}`} style={{width: "100%"}}> 
         <ThemeProvider theme={darkTheme}>
+          <div className="menu-container electrobun-webkit-app-region-no-drag">
+            <IconButton aria-label="anchoring" size="small" onClick={toogleAnchoreWindow} >
+              {isAnchored ? <PinEndIcon fontSize="small" /> : <PictureInPictureAltIcon fontSize="small" />}
+            </IconButton>
             <AppMenuBar/>
+          </div>           
         </ThemeProvider>
-        <span className="electrobun-webkit-app-region-no-drag">
-          <span className="electrobun-webkit-app-region-no-drag">{isChange ? '*' : ''}</span>{fileName}
-        </span>
+        <div className="filename-display-container electrobun-webkit-app-region-no-drag">
+          <span className="filename-display electrobun-webkit-app-region-no-drag">{`${isChange ? '*' : ''}${fileName}`}</span>
+        </div>
         {/* Controles da janela */}
         <div className="controls electrobun-webkit-app-region-no-drag">
-          <ThemeProvider theme={darkTheme}>
+          <ThemeProvider theme={darkTheme}>            
             <IconButton aria-label="minimize" size="small" onClick={handleMinimizeWindow}>
               <MinimizeIcon fontSize="small" />
             </IconButton>

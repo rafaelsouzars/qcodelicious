@@ -1,4 +1,3 @@
-// src/context/EditorContext.tsx
 import { createContext, useContext, useState, ReactNode } from 'react';
 import { electrobun } from '../lib/electrobun';
 import Swal from 'sweetalert2';
@@ -9,6 +8,7 @@ interface EditorContextType {
   fileName: string;
   isChange: boolean;
   isMaximized: boolean; 
+  isAnchored: boolean;
   editorMode: string; 
   setFileContent: (content: string) => void;
   setEditorMode: (mode: string) => void;
@@ -22,6 +22,7 @@ interface EditorContextType {
     direction: "top" | "left" | "top-left" |"right" | "bottom" | "bottom-right", 
     coordinate: {deltaX: number, deltaY: number}
   ) => Promise<void>;
+  toogleAnchoreWindow: () => Promise<void>;
   handleMaximizeWindow: () => Promise<void>;  
   handleMinimizeWindow: () => Promise<void>;
   handleCloseWindow: () => Promise<void>;
@@ -39,6 +40,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
   const [isNewFile, setIsNewFile] = useState<boolean>(false);
   const [isChange, setIsChange] = useState<boolean>(false);
   const [isMaximized, setIsMaximized] = useState<boolean>(false);
+  const [isAnchored, setIsAnchored] = useState<boolean>(false);
   const [editorMode, setEditorMode] = useState<string>("");
   
   const newEditorFile = () => {
@@ -262,6 +264,22 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  async function toogleAnchoreWindow() {
+    try {
+      const isAnchoredWindow = await electrobun.rpc?.request.toogleAnchoreWindow();
+
+      if (isAnchoredWindow) {
+        setIsAnchored(isAnchoredWindow);
+      }
+      else {
+        setIsAnchored(false);
+      }
+    }
+    catch (error) {
+      console.error("❌ [RPC Error]: Erro ao chamar toogleAmchoreWindow:", error);
+    }
+  }
+
   async function handleMaximizeWindow() {
     try {
       await electrobun.rpc?.request.maximizeWindow();
@@ -306,6 +324,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
         fileName,
         isChange,
         isMaximized,
+        isAnchored,
         editorMode,
         setFileContent,
         setEditorMode,
@@ -316,6 +335,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
         handleSave,
         handleSaveAs,        
         handleResizeWindow,
+        toogleAnchoreWindow,
         handleMaximizeWindow,        
         handleMinimizeWindow,
         handleCloseWindow,

@@ -1,4 +1,4 @@
-import { BrowserWindow, BrowserView, Updater, Utils, Screen } from "electrobun/bun";
+import { BrowserWindow, BrowserView, Updater, Utils, Screen, app } from "electrobun/bun";
 import { type AppRPCSchema } from "../shared/types"
 import { isEmpty } from "@mui/material";
 import { join } from 'path';
@@ -209,6 +209,40 @@ const appRPC = BrowserView.defineRPC<AppRPCSchema>({
 		}
 	  },
 
+	  toogleAnchoreWindow: async () => {
+
+		if (isAnchoredWindow) {				
+
+			appMainWindow.setFrame(
+				restoreAnchorFrame.x,
+				restoreAnchorFrame.y,
+				restoreAnchorFrame.width,
+				restoreAnchorFrame.height,
+			);			
+
+			appMainWindow.setAlwaysOnTop(false);
+
+			isAnchoredWindow = false;			
+			return isAnchoredWindow;
+		}
+		else {
+			restoreAnchorFrame = appMainWindow.getFrame();
+			const frontScreenInfo = await appMainWindow.webview.rpc?.request.getScreenInfo();			
+
+			appMainWindow.setFrame(
+				Screen.getPrimaryDisplay().bounds.width - 50,
+				frontScreenInfo.availHeight - 40,
+				50,
+				frontScreenInfo.height - frontScreenInfo.availHeight,
+			);			
+
+			appMainWindow.setAlwaysOnTop(true);
+
+			isAnchoredWindow = true;			
+			return isAnchoredWindow;
+		}		
+	  },
+
 	  closeWindow: async () => {
 		try {
 			appMainWindow.close();			
@@ -229,9 +263,10 @@ const appRPC = BrowserView.defineRPC<AppRPCSchema>({
 // Criando janela principal da aplicação
 const url = await getMainViewUrl();
 const MIN_WIDTH_SIZE = 520;
-const MIN_HEIGHT_SIZE = 380;
+const MIN_HEIGHT_SIZE= 380;
 const desktopArea = Screen.getPrimaryDisplay().bounds;
-
+let restoreAnchorFrame = { x: 0, y: 0, width: 800, height: 600};
+let isAnchoredWindow = false;
 
 // Windows and MacOSX render
 const appMainWindow = new BrowserWindow({
@@ -250,7 +285,7 @@ const appMainWindow = new BrowserWindow({
 });
 
 // Monitora o evento loding do front-end
-appMainWindow.webview.on("dom-ready", () => {
+appMainWindow.webview.on("dom-ready", () => {	
 
 	appMainWindow.webview.autoResize = true;
 	

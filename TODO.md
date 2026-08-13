@@ -9,7 +9,7 @@ qCodelicious Code Editor Project
 - [x] Footer. ✅
 - [x] Realocator opacity control. ✅
 - [x] Window Control Buttons (Max, Min and Close). ✅
-- [ ] Docker screen function
+- [x] Anchor screen function. ✅
 - [ ] Fix Open and Close file editable state
 - [ ] App icons
 - [ ] About window
