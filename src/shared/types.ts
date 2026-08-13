@@ -40,6 +40,10 @@ export type AppRPCSchema = {
                 params: void;
                 response: void;
             };
+            toogleAnchoreWindow: {
+                params: void;
+                response: boolean;
+            };
             closeWindow: {
                 params: void;
                 response: void;

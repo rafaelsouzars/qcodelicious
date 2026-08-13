@@ -5,7 +5,7 @@ import { useEditor } from '../contexts/index';
 
 const Resizer = () => {
   
-  const { handleResizeWindow, isMaximized } = useEditor();  
+  const { handleResizeWindow, isMaximized, isAnchored } = useEditor();  
 
   useEffect(() => {
       const resizerTop = document.getElementById('resizer-top');
@@ -114,37 +114,37 @@ const Resizer = () => {
         className="resizer"   
         id="resizer-top"          
         data-direction="top"
-        style={{ display: isMaximized ? 'none' : 'block' }}        
+        style={{ display: (isMaximized || isAnchored) ? 'none' : 'block' }}        
       ></div>
       <div 
         className="resizer"  
         id="resizer-left"      
         data-direction="left"
-        style={{ display: isMaximized ? 'none' : 'block' }}
+        style={{ display: (isMaximized || isAnchored) ? 'none' : 'block' }}
       ></div>
       <div 
         className="resizer"
         id="resizer-top_left"        
         data-direction="top-left"
-        style={{ display: isMaximized ? 'none' : 'block' }}
+        style={{ display: (isMaximized || isAnchored) ? 'none' : 'block' }}
       ></div>
       <div 
         className="resizer"   
         id="resizer-right"          
         data-direction="right"
-        style={{ display: isMaximized ? 'none' : 'block' }}
+        style={{ display: (isMaximized || isAnchored) ? 'none' : 'block' }}
       ></div>
       <div 
         className="resizer"  
         id="resizer-bottom"      
         data-direction="bottom"
-        style={{ display: isMaximized ? 'none' : 'block' }}
+        style={{ display: (isMaximized || isAnchored) ? 'none' : 'block' }}
       ></div>
       <div 
         className="resizer"
         id="resizer-bottom_right"        
         data-direction="bottom-right"
-        style={{ display: isMaximized ? 'none' : 'block' }}
+        style={{ display: (isMaximized || isAnchored) ? 'none' : 'block' }}
       ></div>
     </>
   )
