@@ -8,7 +8,7 @@ qCodelicious Code Editor Project
 - [x] Add new style scrollbar editor. ✅
 - [x] Footer. ✅
 - [x] Realocator opacity control. ✅
-- [ ] Window Control Buttons (Max, Min and Close)
+- [x] Window Control Buttons (Max, Min and Close). ✅
 - [ ] Docker screen function
 - [ ] Fix Open and Close file editable state
 - [ ] App icons

@@ -5,7 +5,7 @@ import { useEditor } from '../contexts/index';
 
 const Resizer = () => {
   
-  const { handleResizeWindow } = useEditor();  
+  const { handleResizeWindow, isMaximized } = useEditor();  
 
   useEffect(() => {
       const resizerTop = document.getElementById('resizer-top');
@@ -13,7 +13,7 @@ const Resizer = () => {
       const resizerTopLeft = document.getElementById('resizer-top_left');
       const resizerRight = document.getElementById('resizer-right');
       const resizerBottom = document.getElementById('resizer-bottom');
-      const resizerBottomRight = document.getElementById('resizer-bottom_right');
+      const resizerBottomRight = document.getElementById('resizer-bottom_right');      
 
       function onMouseMoveTop(e: MouseEvent) {    
         const { movementX, movementY } = e;
@@ -103,7 +103,9 @@ const Resizer = () => {
         console.log('Resizer clique: ', e.currentTarget)
         window.addEventListener('mousemove', onMouseMoveBottomRight);
         window.addEventListener('mouseup', onMouseUp);
-      });        
+      }); 
+      
+      
   }, []);
 
   return (
@@ -112,31 +114,37 @@ const Resizer = () => {
         className="resizer"   
         id="resizer-top"          
         data-direction="top"
+        style={{ display: isMaximized ? 'none' : 'block' }}        
       ></div>
       <div 
         className="resizer"  
         id="resizer-left"      
         data-direction="left"
+        style={{ display: isMaximized ? 'none' : 'block' }}
       ></div>
       <div 
         className="resizer"
         id="resizer-top_left"        
         data-direction="top-left"
+        style={{ display: isMaximized ? 'none' : 'block' }}
       ></div>
       <div 
         className="resizer"   
         id="resizer-right"          
         data-direction="right"
+        style={{ display: isMaximized ? 'none' : 'block' }}
       ></div>
       <div 
         className="resizer"  
         id="resizer-bottom"      
         data-direction="bottom"
+        style={{ display: isMaximized ? 'none' : 'block' }}
       ></div>
       <div 
         className="resizer"
         id="resizer-bottom_right"        
         data-direction="bottom-right"
+        style={{ display: isMaximized ? 'none' : 'block' }}
       ></div>
     </>
   )

@@ -28,6 +28,18 @@ export type AppRPCSchema = {
                 };
                 response: void;
             };
+            maximizeWindow: {
+                params: void;
+                response: void;
+            };
+            isMaximizedWindow: {
+                params: void;
+                response: boolean;
+            }
+            minimizeWindow: {
+                params: void;
+                response: void;
+            };
             closeWindow: {
                 params: void;
                 response: void;
@@ -39,7 +51,10 @@ export type AppRPCSchema = {
     }>;
     webview: RPCSchema<{
         requests: {
-
+            getScreenInfo: {
+                params: void;
+                response: { width: number; height: number; availWidth: number; availHeight: number; devicePixelRatio: number; };
+            };
         };
         messages: {
             fileSavedNotification: { path: string };
