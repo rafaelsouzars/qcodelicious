@@ -7,7 +7,8 @@ interface EditorContextType {
   filePath: string | null;
   fileContent: string;
   fileName: string;
-  isChange: boolean; 
+  isChange: boolean;
+  isMaximized: boolean; 
   editorMode: string; 
   setFileContent: (content: string) => void;
   setEditorMode: (mode: string) => void;
@@ -21,6 +22,8 @@ interface EditorContextType {
     direction: "top" | "left" | "top-left" |"right" | "bottom" | "bottom-right", 
     coordinate: {deltaX: number, deltaY: number}
   ) => Promise<void>;
+  handleMaximizeWindow: () => Promise<void>;  
+  handleMinimizeWindow: () => Promise<void>;
   handleCloseWindow: () => Promise<void>;
 }
 
@@ -35,6 +38,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
   const [newFileCounter, setNewFileCounter] = useState<number>(0);
   const [isNewFile, setIsNewFile] = useState<boolean>(false);
   const [isChange, setIsChange] = useState<boolean>(false);
+  const [isMaximized, setIsMaximized] = useState<boolean>(false);
   const [editorMode, setEditorMode] = useState<string>("");
   
   const newEditorFile = () => {
@@ -258,6 +262,33 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  async function handleMaximizeWindow() {
+    try {
+      await electrobun.rpc?.request.maximizeWindow();
+
+      const isMaximizedWindows = await electrobun.rpc?.request.isMaximizedWindow();
+
+      if (isMaximizedWindows) {
+        setIsMaximized(true);
+      }
+      else {
+        setIsMaximized(false);
+      }
+    }
+    catch (error) {
+      console.error("❌ [RPC Error]: Erro ao chamar closeWindow:", error);
+    }
+  }  
+
+  async function handleMinimizeWindow() {
+    try {
+      await electrobun.rpc?.request.minimizeWindow();
+    }
+    catch (error) {
+      console.error("❌ [RPC Error]: Erro ao chamar closeWindow:", error);
+    }
+  }
+
   async function handleCloseWindow() {
     try {
       await electrobun.rpc?.request.closeWindow();
@@ -274,6 +305,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
         fileContent,
         fileName,
         isChange,
+        isMaximized,
         editorMode,
         setFileContent,
         setEditorMode,
@@ -284,6 +316,8 @@ export function EditorProvider({ children }: { children: ReactNode }) {
         handleSave,
         handleSaveAs,        
         handleResizeWindow,
+        handleMaximizeWindow,        
+        handleMinimizeWindow,
         handleCloseWindow,
       }}
     >

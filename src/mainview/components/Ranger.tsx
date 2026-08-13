@@ -1,19 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import Slider from '@mui/material/Slider';
 
 const Ranger = () => {
-    // 1. Usa o estado do React para controlar o valor do slider (iniciando em 70)
+    // Usa o estado do React para controlar o valor do slider (iniciando em 70)
   const [value, setValue] = useState<number>(70);  
-
-  /*const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const volume = Number(e.target.value);
-    setValue(volume);
-
-    // 2. Atualiza a variável CSS global com segurança   
-    document.documentElement.style.setProperty('--editor-opacity', (volume / 100).toString());
-  }*/
 
   const handleChange = (event: Event, newValue: number) => {    
     setValue(newValue);

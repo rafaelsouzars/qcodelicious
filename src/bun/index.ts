@@ -167,6 +167,48 @@ const appRPC = BrowserView.defineRPC<AppRPCSchema>({
 		
 	  },
 
+	  maximizeWindow: async () => {
+		try {
+			// Verifica se a janela ja esta maximizada
+			if (appMainWindow.isMaximized()) {
+				appMainWindow.unmaximize();
+			}
+			else {
+				const frontScreenInfo = await appMainWindow.webview.rpc?.request.getScreenInfo();
+				//const currentFrame = appMainWindow.getFrame();
+				appMainWindow.maximize();
+				appMainWindow.setFrame( 
+					0,
+					0,
+					Screen.getPrimaryDisplay().bounds.width, 
+					frontScreenInfo.availHeight
+				);				
+			}						
+		}
+		catch (error) {
+			console.error("[Channel RCP] - Erro na chamada de maximizeWindow: ", error);
+		}
+	  },
+
+	  isMaximizedWindow: async() => {		
+		return appMainWindow.isMaximized() ? true : false;
+	  },
+
+	  minimizeWindow: async () => {
+		try {
+			// Verifica se a janela ja esta maximizada
+			if (appMainWindow.isMinimized()) {
+				appMainWindow.unminimize();
+			}
+			else {
+				appMainWindow.minimize();
+			}			
+		}
+		catch (error) {
+			console.error("[Channel RCP] - Erro na chamada de minimizeWindow: ", error);
+		}
+	  },
+
 	  closeWindow: async () => {
 		try {
 			appMainWindow.close();			
@@ -188,7 +230,7 @@ const appRPC = BrowserView.defineRPC<AppRPCSchema>({
 const url = await getMainViewUrl();
 const MIN_WIDTH_SIZE = 520;
 const MIN_HEIGHT_SIZE = 380;
-const desktopArea = Screen.getPrimaryDisplay().workArea;
+const desktopArea = Screen.getPrimaryDisplay().bounds;
 
 
 // Windows and MacOSX render
