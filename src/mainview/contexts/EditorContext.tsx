@@ -42,6 +42,20 @@ export function EditorProvider({ children }: { children: ReactNode }) {
   const [isMaximized, setIsMaximized] = useState<boolean>(false);
   const [isAnchored, setIsAnchored] = useState<boolean>(false);
   const [editorMode, setEditorMode] = useState<string>("");
+
+  const openFile = async () => {    
+    const result = await electrobun.rpc?.request.openFile();
+      
+    if (result) {
+      console.log("👉 Arquivo carregado:", result.filePath);        
+      setFileName(result.fileName ?? "filename");
+      setFilePath(result.filePath);
+      setFileContent(result.content);
+
+      if (isChange) setIsChange(false); 
+      if (isNewFile) setIsNewFile(false);       
+    }
+  }
   
   const newEditorFile = () => {
     setFilePath(null);
@@ -118,20 +132,46 @@ export function EditorProvider({ children }: { children: ReactNode }) {
   }  
 
   // Função para abrir o arquivo via RPC e atualizar o estado do editor
-  async function handleOpen() {
-    console.log("👉 [UI] Iniciando abertura de arquivo...");
+  async function handleOpen() {    
     try {
-      const result = await electrobun.rpc?.request.openFile();
-      
-      if (result) {
-        console.log("👉 Arquivo carregado:", result.filePath);        
-        setFileName(result.fileName ?? "filename");
-        setFilePath(result.filePath);
-        setFileContent(result.content);
+      console.log("👉 [UI] Iniciando abertura de arquivo...");
 
-        if (isChange) setIsChange(false); 
-        if (isNewFile) setIsNewFile(false);       
+      if (isChange) {      
+        Swal.fire({        
+          title: "Do you want to save the changes?",
+          icon: "warning",
+          theme: "dark",  
+          customClass: {
+            title: 'swal-title',
+          },      
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: "Save",
+          denyButtonText: `Don't save`
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            handleSave();            
+          }
+          else if (result.isDenied) {
+            Swal.fire({
+              title: "Changes are not saved", 
+              icon: "info", 
+              theme: "dark",
+              customClass: {
+                title: 'swal-title',
+              }
+            }).then((result) => {
+              if (result.isConfirmed) openFile();
+              console.log("👉 [UI] Um novo arquivo foi criado...");
+            });          
+          }
+        });      
       }
+      else {
+        openFile();
+      }   
+      
     } catch (error) {
       console.error("❌ [RPC Error] Erro ao abrir arquivo:", error);
     }

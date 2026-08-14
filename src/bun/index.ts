@@ -1,4 +1,4 @@
-import { BrowserWindow, BrowserView, Updater, Utils, Screen, app } from "electrobun/bun";
+import { BrowserWindow, BrowserView, Updater, Utils, Screen } from "electrobun/bun";
 import { type AppRPCSchema } from "../shared/types"
 import { isEmpty } from "@mui/material";
 import { join } from 'path';
