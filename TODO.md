@@ -10,8 +10,8 @@ qCodelicious Code Editor Project
 - [x] Realocator opacity control. ✅
 - [x] Window Control Buttons (Max, Min and Close). ✅
 - [x] Anchor screen function. ✅
-- [ ] Fix Open and Close file editable state
-- [ ] App icons
+- [x] Fix Open and Close file editable state. ✅
+- [x] App icons. ✅
 - [ ] About window
 - [ ] Config file
 
