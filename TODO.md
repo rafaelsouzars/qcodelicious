@@ -12,7 +12,7 @@ qCodelicious Code Editor Project
 - [x] Anchor screen function. ✅
 - [x] Fix Open and Close file editable state. ✅
 - [x] App icons. ✅
-- [ ] About window
+- [x] About window. ✅
 - [ ] Config file
 
 ## Builds
