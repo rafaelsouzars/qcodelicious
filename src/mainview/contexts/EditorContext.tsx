@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 import { electrobun } from '../lib/electrobun';
 import Swal from 'sweetalert2';
+import { WindowAbout } from '../utils/index';
 
 interface EditorContextType {
   filePath: string | null;
@@ -26,6 +27,7 @@ interface EditorContextType {
   handleMaximizeWindow: () => Promise<void>;  
   handleMinimizeWindow: () => Promise<void>;
   handleCloseWindow: () => Promise<void>;
+  handleWindowAbout: () => void;
 }
 
 const EditorContext = createContext<EditorContextType | undefined>(undefined);
@@ -356,6 +358,16 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  async function handleWindowAbout() {
+    await WindowAbout({
+      title: 'qCodelicious v1.0.0',
+      text: 'Simple Code Editor',
+      imageWidth: 128,
+      imageHeight: 128,
+      imageAlt: 'qCodelicious App Icon'
+    });
+  }
+
   return (
     <EditorContext.Provider
       value={{
@@ -379,6 +391,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
         handleMaximizeWindow,        
         handleMinimizeWindow,
         handleCloseWindow,
+        handleWindowAbout,
       }}
     >
       {children}

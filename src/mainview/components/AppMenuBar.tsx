@@ -16,7 +16,14 @@ import {
 
 export default function AppMenubar() {  
   // Pega as ações diretamente do contexto
-  const { handleNew, handleOpen, handleSave, handleSaveAs, handleCloseWindow, filePath } = useEditor();  
+  const { 
+    handleNew, 
+    handleOpen, 
+    handleSave, 
+    handleSaveAs, 
+    handleCloseWindow, 
+    handleWindowAbout, 
+    filePath } = useEditor();  
 
   return (
     <Menubar>
@@ -53,10 +60,12 @@ export default function AppMenubar() {
         <MenuPortal>
           <MenuPositioner sideOffset={4}>
             <MenuPopup>
-              <MenuItem>Documentation</MenuItem>
+              <MenuItem>                
+                Documentation
+              </MenuItem>
               <MenuItem>Release notes</MenuItem>
               <MenuSeparator />
-              <MenuItem>About</MenuItem>
+              <MenuItem onClick={handleWindowAbout}>About</MenuItem>
             </MenuPopup>
           </MenuPositioner>
         </MenuPortal>

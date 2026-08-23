@@ -1,0 +1,1 @@
+export { WindowAbout } from './WindowAbout';

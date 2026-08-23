@@ -156,7 +156,13 @@ html, body {
 }
 
 .swal-title {
+  font-family: Arial, Helvetica, sans-serif;    
+}
+
+.swal-link, .swal-link:visited, .swal-link:hover, .swal-link:active {
   font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  color: inherit;  
 }
 
 /* Bordas de Resize */
