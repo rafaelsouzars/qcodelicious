@@ -12,8 +12,11 @@ qCodelicious Code Editor Project
 - [x] Anchor screen function. ✅
 - [x] Fix Open and Close file editable state. ✅
 - [x] App icons. ✅
-- [x] About window. ✅
-- [ ] Config file
+- [x] Window About. ✅
+- [x] Window alerts utils features. ✅
+- [ ] Display file path.
+- [ ] Changing type when rename file.
+- [ ] Refactor Window Alerts in Editor.
 
 ## Builds
 
