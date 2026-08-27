@@ -14,7 +14,7 @@ qCodelicious Code Editor Project
 - [x] App icons. ✅
 - [x] Window About. ✅
 - [x] Window alerts utils features. ✅
-- [ ] Display file path.
+- [x] Display file path. ✅
 - [ ] Changing type when rename file.
 - [ ] Refactor Window Alerts in Editor.
 
