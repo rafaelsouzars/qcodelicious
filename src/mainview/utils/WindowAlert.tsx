@@ -5,7 +5,7 @@ export interface WindowAlertConfig {
     title?: string,
     icon?: SweetAlertIcon, 
     html?: string,
-    draggable: true,       
+    draggable?: boolean,       
 }
 
 export const WindowAlert = (config: WindowAlertConfig): Promise<SweetAlertResult> => {
