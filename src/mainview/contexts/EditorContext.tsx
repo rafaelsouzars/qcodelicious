@@ -1,7 +1,9 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { electrobun } from '../lib/electrobun';
+import { WindowAbout, WindowSelectList , fileNamePathToExtension } from '../utils/index';
+import { ACE_MODES } from '../../shared/acemodes';
 import Swal from 'sweetalert2';
-import { WindowAbout } from '../utils/index';
+import { set } from 'ace-builds-internal/config';
 
 interface EditorContextType {
   filePath: string | null;
@@ -23,6 +25,7 @@ interface EditorContextType {
     direction: "top" | "left" | "top-left" |"right" | "bottom" | "bottom-right", 
     coordinate: {deltaX: number, deltaY: number}
   ) => Promise<void>;
+  toogleLanguage: () => Promise<void>;
   toogleAnchoreWindow: () => Promise<void>;
   handleMaximizeWindow: () => Promise<void>;  
   handleMinimizeWindow: () => Promise<void>;
@@ -45,14 +48,18 @@ export function EditorProvider({ children }: { children: ReactNode }) {
   const [isAnchored, setIsAnchored] = useState<boolean>(false);
   const [editorMode, setEditorMode] = useState<string>("");
 
+  useEffect(() => {
+    setEditorMode(fileNamePathToExtension(fileName));
+  }, [fileName, filePath])
+
   const openFile = async () => {    
     const result = await electrobun.rpc?.request.openFile();
       
     if (result) {
       console.log("👉 Arquivo carregado:", result.filePath);        
-      setFileName(result.fileName ?? "filename");
+      setFileName(result.fileName ?? "");
       setFilePath(result.filePath);
-      setFileContent(result.content);
+      setFileContent(result.content);      
 
       if (isChange) setIsChange(false); 
       if (isNewFile) setIsNewFile(false);       
@@ -64,7 +71,8 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     setFileContent(DEFAULT_NEW_FILE_CONTENT);
     setNewFileCounter(newFileCounter + 1);
     setFileName(`untilited${newFileCounter}.txt`);
-    setEditorMode("text");
+    //setEditorMode(fileNamePathToExtension(fileName));
+    //setEditorMode("text");
     setIsNewFile(true);
     setIsChange(false);
   };
@@ -306,6 +314,23 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  async function toogleLanguage() {
+    try {
+      const { value: language } = await WindowSelectList({
+        title: 'Language select',
+        inputOptions: ACE_MODES,
+        inputPlaceholder: 'languages'
+      });
+
+      if (language) {
+        setEditorMode(language);
+      }
+    }
+    catch (error) {
+      console.error("❌ [Ace Editor]: Erro ao mudar de languagem:", error);
+    }
+  }
+
   async function toogleAnchoreWindow() {
     try {
       const isAnchoredWindow = await electrobun.rpc?.request.toogleAnchoreWindow();
@@ -387,6 +412,7 @@ export function EditorProvider({ children }: { children: ReactNode }) {
         handleSave,
         handleSaveAs,        
         handleResizeWindow,
+        toogleLanguage,
         toogleAnchoreWindow,
         handleMaximizeWindow,        
         handleMinimizeWindow,
