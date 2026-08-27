@@ -17,7 +17,7 @@ qCodelicious Code Editor Project
 - [x] Display file path. ✅
 - [x] Changing language editor. ✅
 - [x] Refactor Window Alerts in Editor. ✅
-- [ ] Confirm save in close window.
+- [x] Confirm save in close window. ✅
 
 ## Builds
 
