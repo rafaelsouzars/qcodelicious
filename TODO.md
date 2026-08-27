@@ -15,8 +15,8 @@ qCodelicious Code Editor Project
 - [x] Window About. ✅
 - [x] Window alerts utils features. ✅
 - [x] Display file path. ✅
-- [x] Changing language editor.
-- [ ] Refactor Window Alerts in Editor.
+- [x] Changing language editor. ✅
+- [x] Refactor Window Alerts in Editor. ✅
 - [ ] Confirm save in close window.
 
 ## Builds

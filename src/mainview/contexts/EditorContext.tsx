@@ -1,9 +1,15 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { electrobun } from '../lib/electrobun';
-import { WindowAbout, WindowSelectList , fileNamePathToExtension } from '../utils/index';
+import { 
+  WindowAbout, 
+  WindowSelectList , 
+  WindowConfirm, 
+  WindowAlert, 
+  fileNamePathToExtension,
+  WindowDialog
+ } from '../utils/index';
 import { ACE_MODES } from '../../shared/acemodes';
-import Swal from 'sweetalert2';
-import { set } from 'ace-builds-internal/config';
+
 
 interface EditorContextType {
   filePath: string | null;
@@ -86,13 +92,9 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     console.log("👉 [UI] Criando novo arquivo...");
 
     if (isChange) {      
-      Swal.fire({        
+      WindowConfirm({        
         title: "Do you want to save the changes?",
-        icon: "warning",
-        theme: "dark",  
-        customClass: {
-          title: 'swal-title',
-        },      
+        icon: "warning",              
         showDenyButton: true,
         showCancelButton: true,
         confirmButtonText: "Save",
@@ -102,23 +104,15 @@ export function EditorProvider({ children }: { children: ReactNode }) {
         if (result.isConfirmed) {
           //handleSave();
           if (isNewFile) setIsNewFile(false);
-          Swal.fire({
+          WindowAlert({
             title: "Saved!", 
-            icon: "success", 
-            theme: "dark",
-            customClass: {
-              title: 'swal-title',
-            }
+            icon: "success",            
           });
         }
         else if (result.isDenied) {
-          Swal.fire({
+          WindowAlert({
             title: "Changes are not saved", 
-            icon: "info", 
-            theme: "dark",
-            customClass: {
-              title: 'swal-title',
-            }
+            icon: "info",            
           }).then((result) => {
             if (result.isConfirmed) newEditorFile();
             console.log("👉 [UI] Um novo arquivo foi criado...");
@@ -147,13 +141,9 @@ export function EditorProvider({ children }: { children: ReactNode }) {
       console.log("👉 [UI] Iniciando abertura de arquivo...");
 
       if (isChange) {      
-        Swal.fire({        
+        WindowConfirm({        
           title: "Do you want to save the changes?",
-          icon: "warning",
-          theme: "dark",  
-          customClass: {
-            title: 'swal-title',
-          },      
+          icon: "warning",                
           showDenyButton: true,
           showCancelButton: true,
           confirmButtonText: "Save",
@@ -164,13 +154,9 @@ export function EditorProvider({ children }: { children: ReactNode }) {
             handleSave();            
           }
           else if (result.isDenied) {
-            Swal.fire({
+            WindowAlert({
               title: "Changes are not saved", 
-              icon: "info", 
-              theme: "dark",
-              customClass: {
-                title: 'swal-title',
-              }
+              icon: "info",              
             }).then((result) => {
               if (result.isConfirmed) openFile();
               console.log("👉 [UI] Um novo arquivo foi criado...");
@@ -208,13 +194,9 @@ export function EditorProvider({ children }: { children: ReactNode }) {
           setIsChange(false);
           if (isNewFile) setIsNewFile(false);
 
-          Swal.fire({
+          WindowAlert({
             title: "Saved!", 
-            icon: "success", 
-            theme: "dark",
-            customClass: {
-              title: 'swal-title',
-            }
+            icon: "success",           
           });
         }
       }      
@@ -229,13 +211,9 @@ export function EditorProvider({ children }: { children: ReactNode }) {
     console.log("👉 [UI] Salvando arquivo...");
     try {
       // Abre a janela para renomear o arquivo
-      Swal.fire({
+      WindowDialog({
         title: "Save file...",
-        input: "text",
-        theme: "dark",
-        customClass: {
-          title: "swal-title",          
-        },
+        input: "text",        
         inputLabel: "Name file",
         inputPlaceholder: "Insert a name file. Example: 'code.txt'",
         inputValue: fileName,
@@ -263,34 +241,22 @@ export function EditorProvider({ children }: { children: ReactNode }) {
             if (isChange) setIsChange(false);
             if (isNewFile) setIsNewFile(false);
 
-            Swal.fire({
+            WindowAlert({
               title: "Saved!", 
-              icon: "success", 
-              theme: "dark",
-              customClass: {
-                title: 'swal-title',
-              }
+              icon: "success",              
             });
           }
           else {            
-            Swal.fire({
+            WindowAlert({
               title: "Changes are not saved", 
-              icon: "warning", 
-              theme: "dark",
-              customClass: {
-                title: 'swal-title',
-              }
+              icon: "warning",              
             })
           }
         }
         else if (result.isDismissed) { 
-          Swal.fire({
+          WindowAlert({
             title: "Changes are not saved", 
-            icon: "warning", 
-            theme: "dark",
-            customClass: {
-              title: 'swal-title',
-            }
+            icon: "warning",             
           })
         }
       });      
