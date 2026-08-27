@@ -342,7 +342,36 @@ export function EditorProvider({ children }: { children: ReactNode }) {
 
   async function handleCloseWindow() {
     try {
-      await electrobun.rpc?.request.closeWindow();
+      if (isChange) {      
+        WindowConfirm({        
+          title: "Do you want to save the changes?",
+          icon: "warning",                
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: "Save",
+          denyButtonText: `Don't save`
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            handleSave();            
+          }
+          else if (result.isDenied) {
+            WindowAlert({
+              title: "Changes are not saved", 
+              icon: "info",              
+            }).then((result) => {
+              if (result.isConfirmed) {
+                console.log("👉 [UI] O aplicativo será fechado");
+                electrobun.rpc?.request.closeWindow();                
+              }              
+            });          
+          }
+        });      
+      }
+      else {
+        console.log("👉 [UI] O aplicativo será fechado");
+        await electrobun.rpc?.request.closeWindow();
+      }           
     }
     catch (error) {
       console.error("❌ [RPC Error]: Erro ao chamar closeWindow:", error);
