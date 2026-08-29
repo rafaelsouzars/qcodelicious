@@ -1,22 +1,35 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
 
 const Ranger = () => {
-    // 1. Usa o estado do React para controlar o valor do slider (iniciando em 70)
+    // Usa o estado do React para controlar o valor do slider (iniciando em 70)
   const [value, setValue] = useState<number>(70);  
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const volume = Number(e.target.value);
-    setValue(volume);
+  const handleChange = (event: Event, newValue: number) => {    
+    setValue(newValue);
 
-    // 2. Atualiza a variável CSS global com segurança   
-    document.documentElement.style.setProperty('--editor-opacity', (volume / 100).toString());
-  };
-  return (
+    // Atualiza a variável CSS global com segurança   
+    document.documentElement.style.setProperty('--editor-opacity', (value / 100).toString());
+  }
+
+  return (    
     <>
-      <input className="electrobun-webkit-app-region-no-drag" type="range" id="opacity-slider" min="0" max="100" value={value} onChange={handleChange}/>
-      <span className="electrobun-webkit-app-region-no-drag" id="opacity-value">{value}%</span>
-    </>
-  )
+    <Box sx={{ width: "120px"}}>
+      <Slider 
+        sx={{ height: "6px", color: 'grey' }}
+        size="small"          
+        aria-label="opacity-slider" 
+        defaultValue={70} 
+        value={value} 
+        onChange={handleChange}
+        valueLabelDisplay='auto'
+      />
+    </Box>  
+      {/*<input className="electrobun-webkit-app-region-no-drag" type="range" id="opacity-slider" min="0" max="100" value={value} onChange={handleChange}/>
+      <span className="electrobun-webkit-app-region-no-drag" id="opacity-value">{value}%</span>*/}
+    </>   
+  );
 }
 
-export default Ranger
+export default Ranger;

@@ -10,25 +10,25 @@
 </p>
 
 <p align="center">
-  <b>Read this in another language: <a href="README_pt-br.md">Português</a></b>
+  <b>Leia este documento em outro idioma: <a href="README.md">English</a></b>
 </p>
 
 # qCodelicious
 
-A simple code editor.
+Um simples editor de código.
 
 ## Links
 
-* **Website / Live Demo:** [https://rafaelsouzars.github.io/qcodelicious/](https://rafaelsouzars.github.io/qcodelicious/)
-* **Repository:** [https://github.com/rafaelsouzars/qcodelicious/tree/dev](https://github.com/rafaelsouzars/qcodelicious/tree/dev)
+* **Website / Demo:** [https://rafaelsouzars.github.io/qcodelicious/](https://rafaelsouzars.github.io/qcodelicious/)
+* **Repositório:** [https://github.com/rafaelsouzars/qcodelicious/tree/dev](https://github.com/rafaelsouzars/qcodelicious/tree/dev)
 
-## Frameworks & Libraries
+## Frameworks e Bibliotecas
 
 * [ElectroBun](https://blackboard.sh/electrobun/)
 * [Ace Editor](https://ace.c9.io)
 * [SweetAlert2](https://sweetalert2.github.io)
 * [Material UI](https://mui.com)
 
-## Acknowledgments
+## Agradecimentos
 
-Special thanks to the Electrobun team and to Yoav, Founder of [Blackboard Technology](https://blackboard.sh/), for their support and attention.
+Um agradecimento especial à equipe do Electrobun e ao Yoav, fundador da [Blackboard Technology](https://blackboard.sh/), por toda a atenção e suporte fornecidos.

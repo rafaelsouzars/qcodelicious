@@ -1,82 +1,242 @@
-@tailwind base;
+/*@tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities;*/
 
 :root {
-      /* Variável CSS para controlar o nível de opacidade (0.0 a 1.0) */
-      --editor-opacity: 0.7;
-    }
+  /* Variável CSS para controlar o nível de opacidade (0.0 a 1.0) */
+  --editor-opacity: 0.7;
+}
 
-    body {
-      margin: 0;
-      /* O canal Alfa é controlado pela variável CSS */
-      background: rgba(30, 30, 30, var(--editor-opacity)); 
-      color: #ffffff;
-      font-family: sans-serif;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      transition: background 0.1s ease; /* Transição suave ao mudar a opacidade */
-    }	
-	
-    .title-bar {
-      height: 40px;
-      background: rgba(20, 20, 20, 0.9);
-      -webkit-app-region: drag;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 15px;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    /* Área de controles (não arrastável para permitir cliques no slider) */
-    .controls {
-      -webkit-app-region: no-drag;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
-    }
+html, body { 
+  background: transparent;
+  width: 100vw;
+  height: 100vh; 
+  box-sizing: border-box; 
+  overflow: hidden;  
+} 
 
-    .editor-container {
-      flex: 1;
-      padding: 15px;
-      -webkit-app-region: no-drag;
-    }
+#root {  
+  width: calc(100% - 8px);    
+  height: calc(100% - 8px);
+  margin: 4px;
+  border-radius: 12px;
+  overflow: hidden;  
+  /* O canal Alfa é controlado pela variável CSS */
+  background: rgba(30, 30, 30, var(--editor-opacity)); 
+  color: #ffffff;
+  font-family: sans-serif;  
+  display: flex;
+  flex-direction: column;  
+  transition: background 0.05s ease; /* Transição suave ao mudar a opacidade */
+}	
 
-    .editor {
-      width: 100%;
-      height: 100%;
-      background: transparent;
-      border: none;
-      /*color: #f8f8f2;
-      resize: none;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 16px;
-      outline: none;*/
-    }
+.title-bar {  
+  width: 100%;
+  height: 40px;  
+  box-sizing: border-box;
+  /*background-color: rgba(20, 20, 20, 1);*/
+  background-color: rgba(66, 66, 66, 0.9);
+  -webkit-app-region: drag;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;    
+}
 
-    .ace-twilight .ace_gutter {
-        background: transparent !important;
-    }
+.menu-container {
+  padding: 0 5px;
+  display: flex;
+  align-items: center;  
+  gap: 10px;   
+  -webkit-app-region: no-drag; 
+}
 
-    textarea {
-      width: 100%;
-      height: 100%;
-      background: transparent;
-      border: none;
-      color: #f8f8f2;
-      resize: none;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 16px;
-      outline: none;
-    }
-	
-	/* Elementos filhos que precisam receber cliques normalmente */
-	.titlebar button,
-	.titlebar input,
-	.titlebar select,
-	.titlebar a,
-	.titlebar .clickable-icon {
-	  -webkit-app-region: no-drag;
-	}
+.filename-display-container {
+  -webkit-app-region: no-drag;  
+}
+
+/* Área de controles (não arrastável para permitir cliques no slider) */
+.controls { 
+  padding-right: 45px; 
+  font-size: 10px;
+  display: flex;
+  align-items: center;  
+  gap: 10px;   
+  -webkit-app-region: no-drag;  
+}
+
+.status-bar {
+  width: 100%;
+  height: 28px;
+  padding: 0 45px;
+  box-sizing: border-box;
+  background-color: rgba(60, 60, 60, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  
+  -webkit-app-region: no-drag;
+}
+
+.display {
+  user-select: none;
+}
+
+.display .language-mode {
+  box-sizing: border-box;
+  padding: 0 4px;
+  background-color: #52525b;
+  text-align: center;  
+  border: solid 1px transparent;
+  border-radius: 4px;
+  transition: background-color 0.4s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.display .language-mode:hover {
+  transform: scale(1.1, 1.1);
+  background-color: #71717a;
+}
+
+.display .language-mode:active {
+  transform: scale(0.9, 0.9); 
+}
+
+.editor-container {  
+  width: 100%;
+  height: 100%;  
+  box-sizing: border-box; 
+  overflow: hidden;  
+  /*-webkit-app-region: no-drag;*/
+}
+
+/* Ace Editor Class */
+.ace_editor {
+  background: transparent !important;  
+  margin: 0;   
+  -webkit-app-region: no-drag;
+  /*border: solid 1px white;*/
+}
+
+/* Remove as bordas ou fundos padrões das barras do Ace */
+.ace_scrollbar {
+    background: transparent !important;
+    opacity: 0.5 !important;
+    transition: opacity 0.4s ease-in-out !important; 
+}
+
+.ace_scrollbar:hover {
+    opacity: 1 !important;
+}
+
+/* Estiliza a barra de rolagem vertical interna */
+.ace_scrollbar-v {
+    width: 12px !important;
+}
+
+/* Estiliza a barra de rolagem horizontal interna */
+.ace_scrollbar-h {
+    height: 12px !important;
+}
+
+/* Estiliza o "polegar" (ponteiro/cursor) da barra usando WebKit se necessário. */
+.ace_scrollbar::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.ace_scrollbar::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+.ace_scrollbar::-webkit-scrollbar-thumb {
+    background: #52525b !important;
+    border-radius: 10px;    
+}
+
+.ace_scrollbar::-webkit-scrollbar-thumb:hover {  
+  background: #71717a !important;    
+}
+
+.ace-twilight .ace_gutter {
+    background: transparent !important;
+}
+
+/* Elementos filhos que precisam receber cliques normalmente */
+.titlebar button,
+.titlebar input,
+.titlebar select,
+.titlebar a,
+.titlebar .clickable-icon {
+-webkit-app-region: no-drag;
+}
+
+
+/* SweetAlert2 Class */
+.swal-title {
+  font-family: Arial, Helvetica, sans-serif;    
+}
+
+.swal-link, .swal-link:visited, .swal-link:hover, .swal-link:active {
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  color: inherit;  
+}
+
+/* Bordas de Resize */
+.resizer {
+  position: absolute;
+  z-index: 9999;
+  -webkit-app-region: no-drag;
+}
+
+#resizer-top {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  cursor: n-resize;
+}
+
+#resizer-left {
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  cursor: w-resize;
+}
+
+#resizer-top_left {
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  cursor: nw-resize;   
+}
+
+#resizer-right {
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100%;
+  cursor: e-resize;    
+}
+
+#resizer-bottom {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  cursor: s-resize;   
+}
+
+#resizer-bottom_right {
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  cursor: se-resize;   
+}

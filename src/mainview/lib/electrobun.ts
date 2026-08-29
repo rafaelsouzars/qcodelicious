@@ -1,0 +1,26 @@
+import { Electroview } from 'electrobun/view';
+import {type AppRPCSchema } from '../../shared/types';
+
+const rpc = Electroview.defineRPC<AppRPCSchema>({
+    maxRequestTime: 300000,
+      handlers: {
+        requests: {
+          getScreenInfo: () => {
+            return {
+              width: window.screen.width,
+              height: window.screen.height,
+              availWidth: window.screen.availWidth,
+              availHeight: window.screen.availHeight,
+              devicePixelRatio: window.devicePixelRatio,
+            };
+          },
+        },
+        messages: {
+            fileSavedNotification: ({ path }) => {
+                console.log("Notificação do Backend - Arquivo salvo:", path);
+            }
+        }
+      }
+});
+
+export const electrobun = new Electroview({ rpc });

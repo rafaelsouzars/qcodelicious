@@ -2,25 +2,32 @@ import { ElectrobunConfig } from "electrobun";
 
 export default {
 	app: {
-		name: "react-tailwind-vite",
-		identifier: "reacttailwindvite.electrobun.dev",
-		version: "0.0.1",
+		name: "qcodelicious",
+		identifier: "qcodelicious",
+		version: "1.0.0",
 	},
 	build: {
+		bun: {			
+			entrypoint: "src/bun/index.ts",
+			minify: true,			
+		},
 		// Vite builds to dist/, we copy from there
 		copy: {
 			"dist/index.html": "views/mainview/index.html",
-			"dist/assets": "views/mainview/assets",
+			"dist/assets": "views/mainview/assets",			
 		},
 		// Ignore Vite output in watch mode — HMR handles view rebuilds separately
 		watchIgnore: ["dist/**"],
 		mac: {
+			icons: "src/icon.iconset",
 			bundleCEF: false,
 		},
 		linux: {
-			bundleCEF: false,
+			icon: "src/icon.iconset/icon_256x256.png",
+			bundleCEF: true,
 		},
 		win: {
+			icon: "./src/icon.iconset/icon_256x256.png",
 			bundleCEF: false,
 		},
 	},
