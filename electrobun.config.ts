@@ -3,7 +3,7 @@ import { ElectrobunConfig } from "electrobun";
 export default {
 	app: {
 		name: "qcodelicious",
-		identifier: "qcodelicious.rafaelsouzars",
+		identifier: "qcodelicious",
 		version: "1.0.0",
 	},
 	build: {
@@ -27,7 +27,7 @@ export default {
 			bundleCEF: true,
 		},
 		win: {
-			icon: "src/icon.iconset/icon_256x256.png",
+			icon: "./src/icon.iconset/icon_256x256.png",
 			bundleCEF: false,
 		},
 	},
