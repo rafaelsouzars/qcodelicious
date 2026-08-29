@@ -7,9 +7,14 @@ const Footer = () => {
 
   return (
     <div className="status-bar">
-      <span className="electrobun-webkit-app-region-no-drag" onDoubleClick={toogleLanguage}>language: {editorMode}</span>     
+      <span className="display electrobun-webkit-app-region-no-drag" >
+        language: 
+        <span className="display language-mode electrobun-webkit-app-region-no-drag" onClick={toogleLanguage}> 
+          {editorMode}
+        </span>
+      </span>     
       <div className="controls electrobun-webkit-app-region-no-drag">
-        <span className="path-display electrobun-webkit-app-region-no-drag">{ filePath ?? ""}</span>
+        <span className="display electrobun-webkit-app-region-no-drag">{ filePath ?? ""}</span>
       </div>
       {/* Controle de Transparência */}
       <div className="controls electrobun-webkit-app-region-no-drag">

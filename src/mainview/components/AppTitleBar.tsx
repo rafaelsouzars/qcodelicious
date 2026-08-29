@@ -63,7 +63,7 @@ const AppTitleBar = () => {
           </div>           
         </ThemeProvider>
         <div className="filename-display-container electrobun-webkit-app-region-no-drag">
-          <span className="filename-display electrobun-webkit-app-region-no-drag">{`${isChange ? '*' : ''}${fileName}`}</span>
+          <span className="display electrobun-webkit-app-region-no-drag">{`${isChange ? '*' : ''}${fileName}`}</span>
         </div>
         {/* Controles da janela */}
         <div className="controls electrobun-webkit-app-region-no-drag">

@@ -57,9 +57,8 @@ html, body {
 }
 
 .filename-display-container {
-  -webkit-app-region: no-drag;
+  -webkit-app-region: no-drag;  
 }
-
 
 /* Área de controles (não arrastável para permitir cliques no slider) */
 .controls { 
@@ -81,6 +80,29 @@ html, body {
   align-items: center;
   justify-content: space-between;  
   -webkit-app-region: no-drag;
+}
+
+.display {
+  user-select: none;
+}
+
+.display .language-mode {
+  box-sizing: border-box;
+  padding: 0 4px;
+  background-color: #52525b;
+  text-align: center;  
+  border: solid 1px transparent;
+  border-radius: 4px;
+  transition: background-color 0.4s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.display .language-mode:hover {
+  transform: scale(1.1, 1.1);
+  background-color: #71717a;
+}
+
+.display .language-mode:active {
+  transform: scale(0.9, 0.9); 
 }
 
 .editor-container {  
